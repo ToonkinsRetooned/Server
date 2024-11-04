@@ -185,6 +185,9 @@ const app = new Elysia()
     close(ws) {
       const { ticket } = ws.data.query as { ticket: string };
 
+      // should be impossible, but just in-case
+      if (!players[ticket] || !clients[ticket]) { return }
+
       propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
         return player.roomId == sender.roomId && player != sender
       }, players[ticket], {
