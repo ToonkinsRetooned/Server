@@ -151,14 +151,8 @@ const app = new Elysia()
           });
           ws.send(message);
           break
-        case 'enterRoom':
-          player.roomId = packet.roomId
-          propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
-            return player.roomId == sender.roomId && player != sender
-          }, player, {
-            type: 'userJoinedRoom',
-            player: player
-          });
+        case 'joinRoom':
+          player.roomId = packet.id
           ws.send({
             type: 'enterRoom',
             players: Object.values(players).filter((x) => x.roomId == player.roomId && x != player),
@@ -167,6 +161,12 @@ const app = new Elysia()
             roomId: player.roomId,
             initialPosition: {x: 0, y: 0, z: -1}
             // TODO: fix room backgounds
+          });
+          propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
+            return player.roomId == sender.roomId && player != sender
+          }, player, {
+            type: 'userJoinedRoom',
+            player: player
           });
           break
         case 'chat':
