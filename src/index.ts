@@ -4,6 +4,7 @@ import itemClasses from './itemClasses.json'
 
 const players: Record<string, SerializedPlayer> = {}
 const clients: Record<string, WebSocket> = {}
+const pinataState: Record<string, Array<string>> = {}
 
 function propagateEvent(
   condition: Function,
@@ -154,7 +155,8 @@ const app = new Elysia()
             pinatas: [],
             coins: [],
             roomId: player.roomId,
-            initialPosition: {x: 0, y: 0, z: -1}
+            initialPosition: {x: 0, y: 0, z: -1},
+            backgroundColor: {r: 255, g: 255, b: 255, a: 1}
             // TODO: fix room backgounds
           });
           propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
@@ -204,6 +206,23 @@ const app = new Elysia()
           });
 
           break
+        case 'clickPinata':
+          const pinataId = packet.pinataId
+          if (!pinataState[pinataId]) { pinataState[pinataId] = [] }
+          
+          if (pinataState[pinataId].length != 4 && pinataState[pinataId].includes(player.id)) {
+            pinataState[pinataId].push(player.id)
+            propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
+              return player.roomId == sender.roomId
+            }, players[ticket], {
+              type: 'pinataUpdateState',
+              pinataId: pinataId,
+              pinataState: pinataState[pinataId].length
+            });
+          } else {
+            // TODO: add ability to get the item if you click after the 4th state
+            delete pinataState[pinataId]
+          }
       };
     },
 

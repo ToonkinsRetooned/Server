@@ -31,7 +31,7 @@ I decompiled a beta copy of the desktop build from April 2020 which allows me to
 - (RE-IMPLEMENTED) chat
 - (RE-IMPLEMENTED) userLeaveRoom
 - (RE-IMPLEMENTED) updateActiveItem
-- pinataUpdateState
+- (RE-IMPLEMENTED) pinataUpdateState
 - addItems
 - spawnCoin
 - spawnCoinCollected
