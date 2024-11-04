@@ -1,23 +1,38 @@
 import { Elysia } from "elysia";
-import { SerializedPlayer, PlayFabGetAccountInfo, PlayFabGetUserInventory, PlayFabItem } from "./types";
+import { SerializedPlayer, SerializedSpawnObject, PlayFabGetAccountInfo, PlayFabGetUserInventory, PlayFabItem } from "./types";
 import itemClasses from './itemClasses.json'
 
 const players: Record<string, SerializedPlayer> = {}
 const clients: Record<string, WebSocket> = {}
+const rooms: Record<string, {pinatas: Record<string, Array<string>>, coins: Array<SerializedSpawnObject>}> = {
+  "0": {pinatas: {}, coins: []},
+  "1": {pinatas: {}, coins: []},
+  "2": {pinatas: {}, coins: []}
+}
 const pinataState: Record<string, Array<string>> = {}
 
 function propagateEvent(
   condition: Function,
-  sender: SerializedPlayer,
+  sender: SerializedPlayer | null,
   message: { type: string } & Record<string, any>
 ) {
   console.log('Propagating ' + message.type + " event..");
   for (let player of Object.values(players)) {
-    if (condition(player, sender) && player != undefined) {
+    let include;
+    if (sender != null) {
+      include = condition(player, sender);
+    } else {
+      include = condition(player)
+    }
+
+    if (include && player != undefined) {
       try {
+        console.log('| Propagating to: ' + player.username, player.id)
         //@ts-ignore: The packet is converted to the correct type during traffic.
         clients[player.id].send(message);
-      } catch(e) {}
+      } catch(e) {
+        console.log('| Error when propagating: ', e)
+      }
     }
   }
 }
@@ -35,8 +50,10 @@ const app = new Elysia()
     } else {
       return {
         success: true,
-        connections: clients.length,
-        players: Object.values(players)
+        connections: Object.keys(clients).length,
+        players: Object.values(players),
+        rooms: rooms,
+        pinatas: pinataState
       }
     }
   })
@@ -104,13 +121,13 @@ const app = new Elysia()
 
       players[ticket] = serialized;
       //@ts-ignore
-      clients[session[0]] = ws;
+      clients[serialized.id] = ws;
 
       ws.send({
         type: 'enterRoom',
         players: Object.values(players).filter((x) => x.roomId == "0" && x != serialized),
-        pinatas: [],
-        coins: [],
+        pinatas: rooms[serialized.roomId].pinatas,
+        coins: rooms[serialized.roomId].coins,
         roomId: "0",
         initialPosition: {x: 0, y: 0, z: -1},
         backgroundColor: {r: 255, g: 255, b: 255, a: 1}
@@ -152,8 +169,8 @@ const app = new Elysia()
           ws.send({
             type: 'enterRoom',
             players: Object.values(players).filter((x) => x.roomId == player.roomId && x != player),
-            pinatas: [],
-            coins: [],
+            pinatas: rooms[player.roomId].pinatas,
+            coins: rooms[player.roomId].coins,
             roomId: player.roomId,
             initialPosition: {x: 0, y: 0, z: -1},
             backgroundColor: {r: 255, g: 255, b: 255, a: 1}
@@ -207,22 +224,44 @@ const app = new Elysia()
 
           break
         case 'clickPinata':
-          const pinataId = packet.pinataId
-          if (!pinataState[pinataId]) { pinataState[pinataId] = [] }
-          
-          if (pinataState[pinataId].length != 4 && pinataState[pinataId].includes(player.id)) {
-            pinataState[pinataId].push(player.id)
+          const pinataId = packet.id
+          if (!rooms[player.roomId].pinatas[pinataId]) { rooms[player.roomId].pinatas[pinataId] = [] }
+
+          const pinataRecord = rooms[player.roomId].pinatas[pinataId]
+          if (pinataRecord.length != 4 && !pinataRecord.includes(player.id)) {
+            pinataRecord.push(player.id)
             propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
               return player.roomId == sender.roomId
             }, players[ticket], {
               type: 'pinataUpdateState',
               pinataId: pinataId,
-              pinataState: pinataState[pinataId].length
+              pinataState: pinataRecord.length
             });
-          } else {
+          } else if (pinataRecord.length == 4) {
             // TODO: add ability to get the item if you click after the 4th state
-            delete pinataState[pinataId]
+            delete rooms[player.roomId].pinatas[pinataId];
           }
+          break
+        case 'collectObject':
+          if (packet.collectibleType == 'COIN') {
+            const roomCoins = rooms[player.roomId].coins
+            //@ts-ignore
+            const coin = roomCoins.filter((coin) => coin.id == packet.collectibleId)[0]
+            if (!coin) return;
+            player.coins += coin.value
+
+            propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
+              return player.roomId == sender.roomId
+            }, players[ticket], {
+              type: 'spawnCoinCollected',
+              coinId: coin.id,
+              coinValue: coin.value,
+              playerId: player.id
+            });
+
+            delete rooms[player.roomId].coins[packet.collectibleId];
+          }
+          break
       };
     },
 
@@ -239,10 +278,36 @@ const app = new Elysia()
         playerId: players[ticket].id
       });
 
-      delete players[ticket]
-      delete clients[ticket]
+      delete players[ticket];
+      delete clients[ticket];
     }
   })
   .listen(3000);
+
+function random(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+  
+setInterval(() => {
+  if (Object.keys(players).length > 0) {
+    const coinRoom = random(0, 2).toString();
+    if (rooms[coinRoom].coins.length == 10) return;
+
+    const newCoin: SerializedSpawnObject = {
+      id: (rooms[coinRoom].coins.length + 1).toString(),
+      position: {x: random(2.5, -2.5), y: random(2.5, -2.5)},
+      value: 1
+    }
+    rooms[coinRoom].coins.push(newCoin);
+
+    propagateEvent(function (player: SerializedPlayer) {
+      return player.roomId == coinRoom
+    }, null, {
+      type: 'spawnCoin',
+      roomId: coinRoom,
+      coin: newCoin
+    }); 
+  } 
+}, 5000);
 
 console.log(`🦊 Elysia is running at http://${app.server?.hostname}:${app.server?.port}`);

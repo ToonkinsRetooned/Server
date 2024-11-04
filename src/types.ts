@@ -7,11 +7,8 @@ enum accessLevel {
     PARTY_MASTER = 5
 }
 
-type SerializedPlayerPosition = {
-    x: number,
-    y: number,
-    z: -1
-}
+type SerializedPlayerPosition = { x: number, y: number, z: -1 }
+type SerializedPosition = { x: number, y: number }
 
 export type SerializedPlayer = {
     id: string,
@@ -34,6 +31,12 @@ export type SerializedPlayer = {
     level: number,
     xp: number,
     globalMusicEnabled: boolean
+}
+
+export type SerializedSpawnObject = {
+    id: string,
+    position: SerializedPosition,
+    value: number
 }
   
 export type PlayFabGetAccountInfo = {
