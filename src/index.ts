@@ -144,6 +144,7 @@ const app = new Elysia()
       
       switch (packet.type) {
         case 'enterRoom':
+          player.roomId = packet.roomId
           ws.send(message);
           break
         case 'chat':
