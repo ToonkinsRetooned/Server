@@ -8,6 +8,8 @@ interface SerializedPlayer {
 	roomId: string,
 	position: any,
 	itemCharacter: string,
+  itemHead: "1",
+  itemOverbody: "1",
 	itemNeck: string,
 	itemOverwear: string,
 	itemBody: string,
