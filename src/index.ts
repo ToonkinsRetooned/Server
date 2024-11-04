@@ -29,6 +29,8 @@ const app = new Elysia()
       return {
         success: true,
         connections: clients.length,
+        players: Object.values(players)
+        /*
         players: Object.values(players).map((player) => {
           return {
             id: player.id,
@@ -39,19 +41,21 @@ const app = new Elysia()
             position: player.position
           }
         })
+          */
       }
     }
   })
   .get('/*', async (ctx) => { return Bun.file(ctx.path != "/" ? `play${ctx.path.replace('play/', '')}` : `play/index.html`); })
   .ws('/', {
     async open(ws) {
-      const { ticket } = ws.data.query;
-      if (!ticket) ws.close();
-      //@ts-expect-error
-      if (Object.keys(players).includes(ticket)) ws.close();
+      const { ticket } = ws.data.query as { ticket: string };
+      if (!ticket || Object.keys(players).includes(ticket)) {
+        ws.close();
+        return
+      };
 
       const session = atob(ticket as string);
-      const sessionSegments = session.split('-');
+      const sessionSegments: Array<string> = session.split('-');
 
       const account: PlayFabGetAccountInfo = (await (await fetch('https://ab3c.playfabapi.com/Client/GetAccountInfo', {
         method: "POST",
@@ -63,8 +67,11 @@ const app = new Elysia()
           "Content-Type": 'application/json'
         }
       })).json());
-      if (account.code != 200) ws.close();
-      if (account.data.AccountInfo.TitleInfo.isBanned) ws.close();
+
+      if (account.code != 200 || account.data.AccountInfo.TitleInfo.isBanned) {
+        ws.close();
+        return
+      }
 
       const inventory: PlayFabGetUserInventory = (await (await fetch('https://ab3c.playfabapi.com/Client/GetUserInventory', {
         method: "POST",
@@ -102,7 +109,6 @@ const app = new Elysia()
         globalMusicEnabled: true
       };
 
-      //@ts-ignore
       players[ticket] = serialized;
       //@ts-ignore
       clients[session[0]] = ws;
@@ -113,10 +119,7 @@ const app = new Elysia()
         pinatas: [],
         coins: [],
         roomId: "0",
-        initialPosition: {
-          x: 0,
-          y: 0
-        },
+        initialPosition: {x: 0, y: 0, z: -1},
         // TODO: fix room backgounds
       });
 
