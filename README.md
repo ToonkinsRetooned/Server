@@ -6,15 +6,31 @@ An attempt to bring back Toonkins - a virtual world that closed 2 years ago. The
 
 I decompiled a beta copy of the desktop build from April 2020 which allows me to see what events the client listens for and what it expects from each.
 
-### Identified from Desktop Build
+### Re-implemented
 
+> Both
+- walk
+- chat
+- updateActiveItem
+
+> Server -> Client
 - enterRoom
 - userJoinedRoom
 - login
-- walk
-- chat
 - userLeaveRoom
-- updateActiveItem
+
+> Client -> Server
+- joinRoom
+
+### Identified from Desktop Build
+
+- (RE-IMPLEMENTED) enterRoom
+- (RE-IMPLEMENTED) userJoinedRoom
+- (RE-IMPLEMENTED) login
+- (RE-IMPLEMENTED) walk
+- (RE-IMPLEMENTED) chat
+- (RE-IMPLEMENTED) userLeaveRoom
+- (RE-IMPLEMENTED) updateActiveItem
 - pinataUpdateState
 - addItems
 - spawnCoin
