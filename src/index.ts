@@ -11,9 +11,9 @@ function propagateEvent(
 ) {
   console.log('Propagating ' + message.type + " event..");
   for (let player of Object.values(players)) {
-    if (condition(player, sender)) {
+    if (condition(player, sender) && player != undefined) {
       //@ts-ignore: The packet is converted to the correct type during traffic.
-      clients[player.id].send(message)
+      clients[player.id].send(message);
     }
   }
 }
@@ -153,7 +153,7 @@ const app = new Elysia()
       const { ticket } = ws.data.query as { ticket: string };
 
       propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
-        return player.roomId == sender.roomId
+        return player.roomId == sender.roomId && player != sender
       }, players[ticket], {
         type: 'userLeaveRoom',
         playerId: players[ticket].id
