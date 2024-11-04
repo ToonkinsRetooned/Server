@@ -14,7 +14,7 @@ type SerializedPlayerPosition = {
 
 export type SerializedPlayer = {
     id: string,
-    connectionId: number,
+    connectionId: string,
     username: string,
     roomId: string,
     accessLevel: accessLevel,

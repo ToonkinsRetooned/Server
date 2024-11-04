@@ -22,15 +22,16 @@ const app = new Elysia()
       //@ts-expect-error
       if (Object.keys(players).includes(ticket)) ws.close();
 
-      const session = atob(ticket as string).split('-');
+      const session = atob(ticket as string)
+      const sessionSegments = session.split('-');
 
       const account: PlayFabGetAccountInfo = (await (await fetch('https://ab3c.playfabapi.com/Client/GetAccountInfo', {
         method: "POST",
         body: JSON.stringify({
-          "PlayFabId": session[0]
+          "PlayFabId": sessionSegments[0]
         }),
         headers: {
-          "X-Authorization": "1C02155FEDCF52ED-DD86BB39C712ECF5-4D53C68D7AC7D4BE-AB3C-8DCFC0D3558520B-lB2wfnqKAsVdfZFmSN+H7lfXkG1wHkWxbcZQoQgXdo0=",
+          "X-Authorization": session,
           "Content-Type": 'application/json'
         }
       })).json());
@@ -40,17 +41,18 @@ const app = new Elysia()
       const inventory: PlayFabGetUserInventory = (await (await fetch('https://ab3c.playfabapi.com/Client/GetUserInventory', {
         method: "POST",
         body: JSON.stringify({
-          "PlayFabId": session[0]
+          "PlayFabId": sessionSegments[0]
         }),
         headers: {
-          "X-Authorization": "1C02155FEDCF52ED-DD86BB39C712ECF5-4D53C68D7AC7D4BE-AB3C-8DCFC0D3558520B-lB2wfnqKAsVdfZFmSN+H7lfXkG1wHkWxbcZQoQgXdo0=",
+          "X-Authorization": session,
           "Content-Type": 'application/json'
         }
       })).json());
 
       // !Fix username key causing WebAssembly error
-      const serialized = {
-        id: session[0],
+      //@ts-ignore: ^ Username key commented out due to awaiting bug fix above
+      const serialized: SerializedPlayer = {
+        id: sessionSegments[0],
         connectionId: (Object.keys(players).length + 1).toString(),
         //username: account.data.AccountInfo.TitleInfo.DisplayName,
         accessLevel: 0,
@@ -68,7 +70,7 @@ const app = new Elysia()
         inventory: inventory.data.Inventory,
         coins: inventory.data.VirtualCurrency.TK,
         level: 1,
-        xp: 43,
+        xp: 0,
         globalMusicEnabled: true
       };
 
