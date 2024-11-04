@@ -1,12 +1,13 @@
 {
-  "name": "cosmic-cove",
+  "name": "toonkins-revival",
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
-    "elysia": "latest"
+    "elysia": "latest",
+    "playfab-sdk": "^2.164.241025"
   },
   "devDependencies": {
     "bun-types": "latest"
