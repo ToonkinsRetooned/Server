@@ -1,10 +1,15 @@
 <!doctype html>
 <html lang="en-us">
   <head>
+    <!-- META TAGS -->
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <!-- PUBLIC -->
     <title>Toonkins | Play</title>
     <link rel="icon" type="image/x-icon" href="Images/favicon.ico">
+
+    <!-- RESOURCES -->
     <style>
       * {
         margin: 0;
@@ -142,7 +147,45 @@
     </style>
     </script>
     <script src="/play/Build/UnityLoader.js"></script>
+
+    <!-- WEBGL LOADING & TOONKINS.COM REQUEST PATCHES -->
     <script>
+      const prototypeSocket = window.WebSocket;
+      let ticket = null;
+      window.WebSocket = function(socketURL, protocols) {
+        ticket = new prototypeSocket(socketURL.replace('wss://www.toonkins.com:8081', 'ws://localhost:3000'), protocols);
+        return ticket;
+      };
+      function packet(data) {
+        if (ticket == null || data == null || data == undefined) return;
+        const JSONPacket = JSON.stringify(data);
+        const Encoder = new TextEncoder();
+        ticket.send(Encoder.encode(JSONPacket).buffer);
+      }
+      window.WebSocket.prototype = prototypeSocket.prototype;
+
+      const prototypeSend = prototypeSocket.prototype.send;
+      prototypeSocket.prototype.send = function(data) {
+        console.log('Sending Packet:', data);
+        return prototypeSend.call(this, data);
+      };
+
+      const prototypeFetch = window.fetch;
+      window.fetch = function(url, options) {
+        alert('GOT FETCH!!')
+        const baseUrl = 'https://www.toonkins.com/v1/';
+        if (url.startsWith(baseUrl)) {
+          console.log('FETCH STARTS WITH');
+          const path = url.replace(baseUrl, '');
+          const newUrl = `http://localhost:3000/v1/${path}`;
+          return prototypeFetch.call(this, newUrl, options);
+        }
+
+        return prototypeFetch.apply(this, arguments);
+      };
+      window.fetch.prototype = prototypeFetch.prototype;
+
+      
       function UnityProgress(gameInstance, progress) {
         var container = document.getElementById("gameContainer");
         if (container) document.body.style.background = container.style.background;
@@ -166,27 +209,6 @@
         }
       }
 
-      const prototypeSocket = window.WebSocket;
-      let ticket = null;
-      window.WebSocket = function(socketURL, protocols) {
-        ticket = new prototypeSocket(socketURL.replace('wss://www.toonkins.com:8081', 'ws://localhost:3000'), protocols);
-        return ticket;
-      };
-      function packet(data) {
-        if (ticket == null || data == null || data == undefined) return;
-        const JSONPacket = JSON.stringify(data);
-        const Encoder = new TextEncoder();
-        ticket.send(Encoder.encode(JSONPacket).buffer);
-      }
-      window.WebSocket.prototype = prototypeSocket.prototype;
-
-      // Optional: Log the modified WebSocket connections for debugging
-      const prototypeSend = prototypeSocket.prototype.send;
-      prototypeSocket.prototype.send = function(data) {
-        console.log('Sending Packet:', data);
-        return prototypeSend.call(this, data);
-      };
-
       var url = window.location.pathname === "/play/" ? "Build/play.json" : "play/Build/play.json";
       var gameInstance = UnityLoader.instantiate("gameContainer", url, {
         onProgress: UnityProgress,
@@ -196,7 +218,6 @@
         }
       });
     </script>
-    <script src="getArchive.js"></script>
   </head>
   <body>
     <div id="images">

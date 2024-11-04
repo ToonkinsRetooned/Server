@@ -37,10 +37,37 @@ function propagateEvent(
   }
 }
 
+function killPlayer(ticket: string) {
+  propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
+    return player.roomId == sender.roomId && player != sender
+  }, players[ticket], {
+    type: 'userLeaveRoom',
+    playerId: players[ticket].id
+  });
+
+  delete players[ticket];
+  delete clients[ticket];
+}
+
 const app = new Elysia()
-  .get('/v1/user/email-verified', () => {return {
-    emailVerified: true
-  }})
+  .get('/v1/user/email-verified', ({set, error}) => {
+    set.headers['Access-Control-Allow-Origin'] = '*';
+    set.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
+    set.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
+
+    return {
+      emailVerified: true
+    }
+  })
+  .options('/v1/user/email-verified', ({set, error}) => {
+    set.headers['Access-Control-Allow-Origin'] = '*';
+    set.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
+    set.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
+    
+    return {
+      emailVerified: true
+    }
+  })
   .get('/dev', (ctx) => {
     if (Object.keys(players).length == 0) {
       return {
@@ -84,6 +111,9 @@ const app = new Elysia()
         ws.close();
         return
       }
+
+      const existingSession = Object.values(players).findIndex((player) => player.username == account.data.AccountInfo.TitleInfo.DisplayName);
+      if (existingSession != -1) { killPlayer(ticket); }
 
       const inventory: PlayFabGetUserInventory = (await (await fetch('https://ab3c.playfabapi.com/Client/GetUserInventory', {
         method: "POST",
@@ -235,7 +265,8 @@ const app = new Elysia()
             }, players[ticket], {
               type: 'pinataUpdateState',
               pinataId: pinataId,
-              pinataState: pinataRecord.length
+              //pinataState: pinataRecord.length
+              pinataState: 3
             });
           } else if (pinataRecord.length == 4) {
             // TODO: add ability to get the item if you click after the 4th state
@@ -270,16 +301,7 @@ const app = new Elysia()
 
       // should be impossible, but just in-case
       if (!players[ticket] || !clients[ticket]) { return }
-
-      propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
-        return player.roomId == sender.roomId && player != sender
-      }, players[ticket], {
-        type: 'userLeaveRoom',
-        playerId: players[ticket].id
-      });
-
-      delete players[ticket];
-      delete clients[ticket];
+      killPlayer(ticket);
     }
   })
   .listen(3000);
