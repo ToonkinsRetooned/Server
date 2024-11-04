@@ -1,12 +1,27 @@
+enum accessLevel {
+    PLAYER = 0,
+    MODERATOR = 1,
+    UNDERCOVER_MODERATOR = 2,
+    ADMIN = 3,
+    AMBASSADOR = 4,
+    PARTY_MASTER = 5
+}
+
+type SerializedPlayerPosition = {
+    x: number,
+    y: number
+}
+
 export type SerializedPlayer = {
     id: string,
     connectionId: number,
     username: string,
     roomId: string,
-    position: any,
+    accessLevel: accessLevel,
+    position: SerializedPlayerPosition,
     itemCharacter: string,
-    itemHead: "1",
-    itemOverbody: "1",
+    itemHead: string,
+    itemOverbody: string,
     itemNeck: string,
     itemOverwear: string,
     itemBody: string,
