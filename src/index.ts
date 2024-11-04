@@ -1,5 +1,6 @@
 import { Elysia } from "elysia";
 const players: Record<string, SerializedPlayer> = {}
+const clients: Array<Record<string, WebSocket>> = []
 
 interface SerializedPlayer {
   id: string,
@@ -95,7 +96,7 @@ const app = new Elysia()
       const serialized = {
         id: session[0],
         connectionId: (Object.keys(players).length + 1).toString(),
-        username: account.data.AccountInfo.TitleInfo.DisplayName,
+        //username: account.data.AccountInfo.TitleInfo.DisplayName,
         accessLevel: 0,
         roomId: "0",
         position: {x: 0, y: 0},
@@ -109,21 +110,44 @@ const app = new Elysia()
         itemFace: "1",
         itemFeet: "1",
         inventory: inventory.data.Inventory,
-        coins: 123,
+        coins: inventory.data.VirtualCurrency.TK,
         level: 1,
         xp: 43,
         globalMusicEnabled: true
       };
+
       //@ts-ignore
       players[ticket] = serialized;
+      //@ts-ignore
+      clients[ticket] = ws;
+
       ws.send({type: 'login', player: serialized});
     },
 
     async message(ws, message) {
       const packet = JSON.parse(Buffer.from(message as ArrayBuffer).toString('utf-8'));
       console.log('Received websocket packet: ', packet.type);
+
+      const { ticket } = ws.data.query;
+      if (!ticket) ws.close();
+      //@ts-ignore
+      const player = players[ticket]
       
-      if (packet.type === "enterRoom") ws.send(message);
+      switch (packet.type) {
+        case 'enterRoom':
+          ws.send(message);
+          break
+        case 'chat':
+          // TODO: add checking of message length, invalid characters, etc before replication
+          for (let client of clients) {
+            client.websocket.send({
+              type: 'chat',
+              //@ts-ignore
+              playerId: player.id,
+              text: packet.text
+            })
+          }
+      };
     },
 
     close(ws) {
