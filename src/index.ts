@@ -1,6 +1,6 @@
 import { Elysia } from "elysia";
 const players: Record<string, SerializedPlayer> = {}
-const clients: Array<Record<string, WebSocket>> = []
+const clients: Record<string, WebSocket> = {}
 
 interface SerializedPlayer {
   id: string,
@@ -54,6 +54,15 @@ interface PlayFabGetUserInventory {
       TK: number
     },
     VirtualCurrencyRechargeTimes: {}
+  }
+}
+
+function propagateEvent(condition: Function, sender: SerializedPlayer, message: Object) {
+  for (let player of Object.values(players)) {
+    if (condition(player, sender)) {
+      //@ts-ignore: The packet is converted to the correct type during traffic.
+      clients[player.id].send(message)
+    }
   }
 }
 
@@ -119,7 +128,7 @@ const app = new Elysia()
       //@ts-ignore
       players[ticket] = serialized;
       //@ts-ignore
-      clients[ticket] = ws;
+      clients[session[0]] = ws;
 
       ws.send({type: 'login', player: serialized});
     },
@@ -138,15 +147,15 @@ const app = new Elysia()
           ws.send(message);
           break
         case 'chat':
-          // TODO: add checking of message length, invalid characters, etc before replication
-          for (let client of clients) {
-            client.websocket.send({
-              type: 'chat',
-              //@ts-ignore
-              playerId: player.id,
-              text: packet.text
-            })
-          }
+          // TODO: add checking of message length, invalid characters, etc before propagation
+          propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer){
+            return player.roomId == sender.roomId && player != sender
+          }, player, {
+            type: 'chat',
+            playerId: player.id,
+            text: packet.text
+          });
+          break
       };
     },
 
