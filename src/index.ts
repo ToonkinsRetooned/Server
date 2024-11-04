@@ -81,7 +81,7 @@ const app = new Elysia()
       const serialized: SerializedPlayer = {
         id: sessionSegments[0],
         connectionId: (Object.keys(players).length + 1).toString(),
-        //username: account.data.AccountInfo.TitleInfo.DisplayName,
+        username: account.data.AccountInfo.TitleInfo.DisplayName,
         accessLevel: 0,
         roomId: "0",
         position: {x: 0, y: 0},
@@ -139,6 +139,17 @@ const app = new Elysia()
       const player = players[ticket]
       
       switch (packet.type) {
+        case 'walk':
+          player.position = packet.position
+          propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
+            return player.roomId == sender.roomId && player != sender
+          }, player, {
+            type: 'walk',
+            playerId: player,
+            position: player.position
+          });
+          ws.send(message);
+          break
         case 'enterRoom':
           player.roomId = packet.roomId
           propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
