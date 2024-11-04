@@ -9,7 +9,8 @@ enum accessLevel {
 
 type SerializedPlayerPosition = {
     x: number,
-    y: number
+    y: number,
+    z: -1
 }
 
 export type SerializedPlayer = {
@@ -55,12 +56,22 @@ export type PlayFabGetAccountInfo = {
         }
     }
 }
+
+export type PlayFabItem = {
+    ItemId: string,
+    ItemInstanceId: string,
+    ItemClass: string,
+    PurchaseDate: string,
+    CatalogVersion: string,
+    DisplayName: string,
+    UnitPrice: number
+}
   
 export type PlayFabGetUserInventory = {
     code: number,
     status: string,
     data: {
-        Inventory: Array<Object>,
+        Inventory: Array<PlayFabItem>,
         VirtualCurrency: {
             TK: number
         },

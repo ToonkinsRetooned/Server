@@ -1,5 +1,6 @@
 import { Elysia } from "elysia";
-import { SerializedPlayer, PlayFabGetAccountInfo, PlayFabGetUserInventory } from "./types";
+import { SerializedPlayer, PlayFabGetAccountInfo, PlayFabGetUserInventory, PlayFabItem } from "./types";
+import itemClasses from './itemClasses.json'
 
 const players: Record<string, SerializedPlayer> = {}
 const clients: Record<string, WebSocket> = {}
@@ -12,13 +13,18 @@ function propagateEvent(
   console.log('Propagating ' + message.type + " event..");
   for (let player of Object.values(players)) {
     if (condition(player, sender) && player != undefined) {
-      //@ts-ignore: The packet is converted to the correct type during traffic.
-      clients[player.id].send(message);
+      try {
+        //@ts-ignore: The packet is converted to the correct type during traffic.
+        clients[player.id].send(message);
+      } catch(e) {}
     }
   }
 }
 
 const app = new Elysia()
+  .get('/v1/user/email-verified', () => {return {
+    emailVerified: true
+  }})
   .get('/dev', (ctx) => {
     if (Object.keys(players).length == 0) {
       return {
@@ -30,18 +36,6 @@ const app = new Elysia()
         success: true,
         connections: clients.length,
         players: Object.values(players)
-        /*
-        players: Object.values(players).map((player) => {
-          return {
-            id: player.id,
-            connectionId: player.connectionId,
-            username: player.username,
-            roomId: player.roomId,
-            accessLevel: player.accessLevel,
-            position: player.position
-          }
-        })
-          */
       }
     }
   })
@@ -118,6 +112,7 @@ const app = new Elysia()
         coins: [],
         roomId: "0",
         initialPosition: {x: 0, y: 0, z: -1},
+        backgroundColor: {r: 255, g: 255, b: 255, a: 1}
         // TODO: fix room backgounds
       });
 
@@ -178,6 +173,36 @@ const app = new Elysia()
             playerId: player.id,
             text: packet.text
           });
+          break
+        case 'updateActiveItem':
+          // ? if I learn what the item classes are, maybe add a check to make sure the provided one exists
+          if (player.inventory.findIndex((item: PlayFabItem) => item.ItemId == packet.itemId) == 0) { return }
+          
+          const itemIndex = itemClasses.findIndex((item) => item.ItemId == packet.itemId)
+          if (!itemIndex) { return }
+          const itemClass = itemClasses[itemIndex].ItemClass
+          
+          switch (itemClass) {
+            case 'character': player.itemCharacter = packet.itemId; break
+            case 'head': player.itemHead = packet.itemId; break
+            case 'overbody': player.itemOverbody = packet.itemId; break
+            case 'neck': player.itemNeck = packet.itemId; break
+            case 'overwear': player.itemOverwear = packet.itemId; break
+            case 'body': player.itemBody = packet.itemId; break
+            case 'hand': player.itemHand = packet.itemId; break
+            case 'face': player.itemFace = packet.itemId; break
+            case 'feet': player.itemFeet = packet.itemId; break
+          }
+
+          propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
+            return player.roomId == sender.roomId && player != sender
+          }, players[ticket], {
+            type: 'updateActiveItem',
+            playerId: player.id,
+            itemClass: itemClass,
+            itemId: packet.itemId
+          });
+
           break
       };
     },

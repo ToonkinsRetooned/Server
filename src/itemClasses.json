@@ -1,0 +1,1094 @@
+[
+    {
+      "ItemId": "3",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "4",
+      "ItemClass": "character"
+    },
+    {
+      "ItemId": "5",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "6",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "8",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "7",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "10",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "11",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "12",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "13",
+      "ItemClass": "over_body"
+    },
+    {
+      "ItemId": "14",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "15",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "16",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "17",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "18",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "19",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "20",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "21",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "22",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "23",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "24",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "25",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "26",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "27",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "28",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "29",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "30",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "31",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "32",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "33",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "34",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "35",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "36",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "37",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "38",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "39",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "40",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "41",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "42",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "43",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "44",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "45",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "46",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "47",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "48",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "49",
+      "ItemClass": "over_body"
+    },
+    {
+      "ItemId": "50",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "51",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "52",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "53",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "54",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "55",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "56",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "58",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "59",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "60",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "61",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "62",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "63",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "64",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "65",
+      "ItemClass": "over_body"
+    },
+    {
+      "ItemId": "66",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "67",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "57",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "68",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "69",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "70",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "71",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "award_0",
+      "ItemClass": "award"
+    },
+    {
+      "ItemId": "award_1",
+      "ItemClass": "award"
+    },
+    {
+      "ItemId": "72",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "73",
+      "ItemClass": "over_body"
+    },
+    {
+      "ItemId": "award_2",
+      "ItemClass": "award"
+    },
+    {
+      "ItemId": "award_3",
+      "ItemClass": "award"
+    },
+    {
+      "ItemId": "award_5",
+      "ItemClass": "award"
+    },
+    {
+      "ItemId": "award_6",
+      "ItemClass": "award"
+    },
+    {
+      "ItemId": "award_7",
+      "ItemClass": "award"
+    },
+    {
+      "ItemId": "74",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "75",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "76",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "77",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "78",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "79",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "81",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "82",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "83",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "84",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "85",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "86",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "87",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "88",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "award_8",
+      "ItemClass": "award"
+    },
+    {
+      "ItemId": "award_9",
+      "ItemClass": "award"
+    },
+    {
+      "ItemId": "1",
+      "ItemClass": "character"
+    },
+    {
+      "ItemId": "2",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "9",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "89",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "90",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "91",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "92",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "93",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "award_10",
+      "ItemClass": "award"
+    },
+    {
+      "ItemId": "94",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "95",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "96",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "97",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "98",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "99",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "100",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "101",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "102",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "103",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "104",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "105",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "106",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "107",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "108",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "109",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "110",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "111",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "112",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "113",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "114",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "115",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "116",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "117",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "award_12",
+      "ItemClass": "award"
+    },
+    {
+      "ItemId": "118",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "119",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "120",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "121",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "122",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "123",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "124",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "125",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "126",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "127",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "128",
+      "ItemClass": "over_body"
+    },
+    {
+      "ItemId": "129",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "130",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "131",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "132",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "133",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "134",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "135",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "136",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "137",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "138",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "139",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "140",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "141",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "142",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "143",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "144",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "145",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "146",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "147",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "148",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "149",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "150",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "151",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "152",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "153",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "154",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "155",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "156",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "157",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "158",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "159",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "160",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "161",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "162",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "163",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "164",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "165",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "166",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "167",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "168",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "169",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "170",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "171",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "172",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "173",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "174",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "175",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "176",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "177",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "178",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "179",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "180",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "181",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "182",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "183",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "184",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "185",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "186",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "187",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "188",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "189",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "190",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "192",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "193",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "194",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "198",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "191",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "197",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "195",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "204",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "196",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "199",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "200",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "201",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "202",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "203",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "205",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "206",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "207",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "208",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "209",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "210",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "211",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "213",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "212",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "214",
+      "ItemClass": "character"
+    },
+    {
+      "ItemId": "215",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "216",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "217",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "218",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "219",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "220",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "221",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "222",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "223",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "224",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "225",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "226",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "227",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "228",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "233",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "234",
+      "ItemClass": "over_body"
+    },
+    {
+      "ItemId": "230",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "231",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "232",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "235",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "236",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "237",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "238",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "239",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "240",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "229",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "241",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "242",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "243",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "244",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "245",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "246",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "247",
+      "ItemClass": "hand"
+    },
+    {
+      "ItemId": "248",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "249",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "250",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "251",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "252",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "253",
+      "ItemClass": "feet"
+    },
+    {
+      "ItemId": "254",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "255",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "256",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "257",
+      "ItemClass": "body"
+    },
+    {
+      "ItemId": "258",
+      "ItemClass": "overwear"
+    },
+    {
+      "ItemId": "259",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "260",
+      "ItemClass": "face"
+    },
+    {
+      "ItemId": "261",
+      "ItemClass": "neck"
+    },
+    {
+      "ItemId": "262",
+      "ItemClass": "head"
+    },
+    {
+      "ItemId": "263",
+      "ItemClass": "overwear"
+    }
+  ]
