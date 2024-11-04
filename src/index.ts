@@ -4,7 +4,12 @@ import { SerializedPlayer, PlayFabGetAccountInfo, PlayFabGetUserInventory } from
 const players: Record<string, SerializedPlayer> = {}
 const clients: Record<string, WebSocket> = {}
 
-function propagateEvent(condition: Function, sender: SerializedPlayer, message: Object) {
+function propagateEvent(
+  condition: Function,
+  sender: SerializedPlayer,
+  message: { type: string } & Record<string, any>
+) {
+  console.log('Propagating ' + message.type + " event..");
   for (let player of Object.values(players)) {
     if (condition(player, sender)) {
       //@ts-ignore: The packet is converted to the correct type during traffic.
@@ -14,6 +19,28 @@ function propagateEvent(condition: Function, sender: SerializedPlayer, message: 
 }
 
 const app = new Elysia()
+  .get('/dev', (ctx) => {
+    if (Object.keys(players).length == 0) {
+      return {
+        success: false,
+        message: "No players are currently in memory."
+      }
+    } else {
+      return {
+        success: true,
+        connections: clients.length,
+        players: Object.values(players).map((player) => {
+          return {
+            id: player.id,
+            connectionId: player.connectionId,
+            username: player.username,
+            roomId: player.roomId,
+            accessLevel: player.accessLevel
+          }
+        })
+      }
+    }
+  })
   .get('/*', async (ctx) => { return Bun.file(ctx.path != "/" ? `play${ctx.path.replace('play/', '')}` : `play/index.html`); })
   .ws('/', {
     async open(ws) {
@@ -22,7 +49,7 @@ const app = new Elysia()
       //@ts-expect-error
       if (Object.keys(players).includes(ticket)) ws.close();
 
-      const session = atob(ticket as string)
+      const session = atob(ticket as string);
       const sessionSegments = session.split('-');
 
       const account: PlayFabGetAccountInfo = (await (await fetch('https://ab3c.playfabapi.com/Client/GetAccountInfo', {
@@ -80,6 +107,13 @@ const app = new Elysia()
       clients[session[0]] = ws;
 
       ws.send({type: 'login', player: serialized});
+
+      propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer){
+        return player.roomId == sender.roomId && player != sender
+      }, serialized, {
+        type: 'userJoinedRoom',
+        player: serialized
+      });
     },
 
     async message(ws, message) {
@@ -94,11 +128,17 @@ const app = new Elysia()
       switch (packet.type) {
         case 'enterRoom':
           player.roomId = packet.roomId
+          propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
+            return player.roomId == sender.roomId && player != sender
+          }, player, {
+            type: 'userJoinedRoom',
+            player: player
+          });
           ws.send(message);
           break
         case 'chat':
           // TODO: add checking of message length, invalid characters, etc before propagation
-          propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer){
+          propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
             return player.roomId == sender.roomId && player != sender
           }, player, {
             type: 'chat',
@@ -112,7 +152,7 @@ const app = new Elysia()
     close(ws) {
       const { ticket } = ws.data.query as { ticket: string };
 
-      propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer){
+      propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
         return player.roomId == sender.roomId
       }, players[ticket], {
         type: 'userLeaveRoom',
