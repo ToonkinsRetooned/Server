@@ -1,61 +1,8 @@
 import { Elysia } from "elysia";
+import { SerializedPlayer, PlayFabGetAccountInfo, PlayFabGetUserInventory } from "./types";
+
 const players: Record<string, SerializedPlayer> = {}
 const clients: Record<string, WebSocket> = {}
-
-interface SerializedPlayer {
-  id: string,
-	connectionId: number,
-	username: string,
-	roomId: string,
-	position: any,
-	itemCharacter: string,
-  itemHead: "1",
-  itemOverbody: "1",
-	itemNeck: string,
-	itemOverwear: string,
-	itemBody: string,
-	itemHand: string,
-	itemFace: string,
-	itemFeet: string,
-	inventory: any,
-	coins: number,
-	level: number,
-	xp: number,
-	globalMusicEnabled: boolean
-}
-
-interface PlayFabGetAccountInfo {
-  code: number,
-  status: string,
-  data: {
-    AccountInfo: {
-      PlayFabId: string,
-      Created: string,
-      TitleInfo: {
-        DisplayName: string,
-        Origination: string,
-        Created: string,
-        LastLogin: string,
-        FirstLogin: string,
-        isBanned: boolean,
-        // unneccessary data, any type used
-        TitlePlayerAccount: any
-      }
-    }
-  }
-}
-
-interface PlayFabGetUserInventory {
-  code: number,
-  status: string,
-  data: {
-    Inventory: Array<Object>,
-    VirtualCurrency: {
-      TK: number
-    },
-    VirtualCurrencyRechargeTimes: {}
-  }
-}
 
 function propagateEvent(condition: Function, sender: SerializedPlayer, message: Object) {
   for (let player of Object.values(players)) {
