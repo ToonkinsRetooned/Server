@@ -35,7 +35,8 @@ const app = new Elysia()
             connectionId: player.connectionId,
             username: player.username,
             roomId: player.roomId,
-            accessLevel: player.accessLevel
+            accessLevel: player.accessLevel,
+            position: player.position
           }
         })
       }
@@ -101,9 +102,14 @@ const app = new Elysia()
         globalMusicEnabled: true
       };
 
+      //@ts-ignore
+      players[ticket] = serialized;
+      //@ts-ignore
+      clients[session[0]] = ws;
+
       ws.send({
         type: 'enterRoom',
-        players: Object.values(players).filter((x) => x.roomId == "0"),
+        players: Object.values(players).filter((x) => x.roomId == "0" && x != serialized),
         pinatas: [],
         coins: [],
         roomId: "0",
@@ -113,11 +119,6 @@ const app = new Elysia()
         },
         // TODO: fix room backgounds
       });
-
-      //@ts-ignore
-      players[ticket] = serialized;
-      //@ts-ignore
-      clients[session[0]] = ws;
 
       ws.send({type: 'login', player: serialized});
 
@@ -160,7 +161,7 @@ const app = new Elysia()
           });
           ws.send({
             type: 'enterRoom',
-            players: Object.values(players).filter((x) => x.roomId == player.roomId),
+            players: Object.values(players).filter((x) => x.roomId == player.roomId && x != player),
             pinatas: [],
             coins: [],
             roomId: player.roomId,
