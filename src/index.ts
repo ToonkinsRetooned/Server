@@ -84,15 +84,13 @@ const app = new Elysia()
         }
       })).json());
 
-      // !Fix username key causing WebAssembly error
-      //@ts-ignore: ^ Username key commented out due to awaiting bug fix above
       const serialized: SerializedPlayer = {
         id: sessionSegments[0],
         connectionId: (Object.keys(players).length + 1).toString(),
         username: account.data.AccountInfo.TitleInfo.DisplayName,
         accessLevel: 0,
         roomId: "0",
-        position: {x: 0, y: 0},
+        position: {x: 0, y: 0, z: -1},
         itemCharacter: "1",
         itemHead: "1",
         itemOverbody: "1",
@@ -137,9 +135,8 @@ const app = new Elysia()
       const packet = JSON.parse(Buffer.from(message as ArrayBuffer).toString('utf-8'));
       console.log('Received websocket packet: ', packet.type);
 
-      const { ticket } = ws.data.query;
+      const { ticket } = ws.data.query as { ticket: string };
       if (!ticket) ws.close();
-      //@ts-ignore
       const player = players[ticket]
       
       switch (packet.type) {
@@ -168,10 +165,7 @@ const app = new Elysia()
             pinatas: [],
             coins: [],
             roomId: player.roomId,
-            initialPosition: {
-              x: 0,
-              y: 0
-            },
+            initialPosition: {x: 0, y: 0, z: -1}
             // TODO: fix room backgounds
           });
           break
