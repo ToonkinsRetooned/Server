@@ -161,9 +161,17 @@ const app = new Elysia()
     },
 
     close(ws) {
-      const { ticket } = ws.data.query;
-      //@ts-expect-error
-      console.log('Player ' + players[ticket].username + ' disconnected.');
+      const { ticket } = ws.data.query as { ticket: string };
+
+      propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer){
+        return player.roomId == sender.roomId
+      }, players[ticket], {
+        type: 'userLeaveRoom',
+        playerId: players[ticket].id
+      });
+
+      delete players[ticket]
+      delete clients[ticket]
     }
   })
   .listen(3000);
