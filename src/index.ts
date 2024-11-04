@@ -101,6 +101,19 @@ const app = new Elysia()
         globalMusicEnabled: true
       };
 
+      ws.send({
+        type: 'enterRoom',
+        players: Object.values(players).filter((x) => x.roomId == "0"),
+        pinatas: [],
+        coins: [],
+        roomId: "0",
+        initialPosition: {
+          x: 0,
+          y: 0
+        },
+        // TODO: fix room backgounds
+      });
+
       //@ts-ignore
       players[ticket] = serialized;
       //@ts-ignore
@@ -134,7 +147,18 @@ const app = new Elysia()
             type: 'userJoinedRoom',
             player: player
           });
-          ws.send(message);
+          ws.send({
+            type: 'enterRoom',
+            players: Object.values(players).filter((x) => x.roomId == player.roomId),
+            pinatas: [],
+            coins: [],
+            roomId: player.roomId,
+            initialPosition: {
+              x: 0,
+              y: 0
+            },
+            // TODO: fix room backgounds
+          });
           break
         case 'chat':
           // TODO: add checking of message length, invalid characters, etc before propagation
