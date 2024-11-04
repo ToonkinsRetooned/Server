@@ -265,8 +265,8 @@ const app = new Elysia()
             }, players[ticket], {
               type: 'pinataUpdateState',
               pinataId: pinataId,
-              //pinataState: pinataRecord.length
-              pinataState: 3
+              pinataState: pinataRecord.length
+              //pinataState: 3
             });
           } else if (pinataRecord.length == 4) {
             // TODO: add ability to get the item if you click after the 4th state
