@@ -1,7 +1,9 @@
 import { Elysia } from "elysia";
-import { SerializedPlayer, SerializedSpawnObject, PlayFabGetAccountInfo, PlayFabGetUserInventory, PlayFabItem } from "./types";
+import { RoomData, SerializedPlayer, SerializedSpawnObject, PlayFabGetAccountInfo, PlayFabGetUserInventory, PlayFabItem } from "./types";
 import itemClasses from './itemClasses.json'
+import scavengerHunts from './scavengerHunts.json'
 
+const activeScavengerHunt = "easterhunt2020"
 const players: Record<string, SerializedPlayer> = {}
 const clients: Record<string, WebSocket> = {}
 const rooms: Record<string, RoomData> = {
@@ -133,7 +135,8 @@ const app = new Elysia()
         coins: inventory.data.VirtualCurrency.TK,
         level: 1,
         xp: 0,
-        globalMusicEnabled: true
+        globalMusicEnabled: true,
+        shProgress: 0
       };
 
       players[ticket] = serialized;
@@ -168,6 +171,7 @@ const app = new Elysia()
       const { ticket } = ws.data.query as { ticket: string };
       if (!ticket) ws.close();
       const player = players[ticket]
+      const hunt = scavengerHunts[activeScavengerHunt]
       
       switch (packet.type) {
         case 'walk':
@@ -253,7 +257,6 @@ const app = new Elysia()
               type: 'pinataUpdateState',
               pinataId: pinataId,
               pinataState: pinataRecord.length
-              //pinataState: 3
             });
           } else if (pinataRecord.length == 4) {
             // TODO: add ability to get the item if you click after the 4th state
@@ -278,6 +281,31 @@ const app = new Elysia()
             });
 
             delete rooms[player.roomId].coins[packet.collectibleId];
+          }
+          break
+        case 'ssh':
+          player.shProgress = 0
+          ws.send({
+            type: 'shs',
+            scavengerHuntId: activeScavengerHunt,
+            items: hunt.map((item) => {return {id: item.id}}),
+            initialItem: hunt[0]
+          });
+          break
+        case 'cshi':
+          ws.send({
+            type: 'shic',
+            scavengerHuntId: activeScavengerHunt,
+            collectedItemId: scavengerHunts[activeScavengerHunt][player.shProgress].id,
+            nextItem: scavengerHunts[activeScavengerHunt][player.shProgress + 1]
+          })
+          player.shProgress += 1
+          if (player.shProgress == hunt.length) {
+            ws.send({
+              type: 'she',
+              scavengerHuntId: activeScavengerHunt
+            });
+            // TODO: award items for completing scavenger hunt
           }
           break
       };
