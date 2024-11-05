@@ -41,6 +41,18 @@ function propagateEvent(
   }
 }
 
+function killPlayer(ticket: string) {
+  propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
+    return player.roomId == sender.roomId && player != sender
+  }, players[ticket], {
+    type: 'userLeaveRoom',
+    playerId: players[ticket].id
+  });
+
+  delete players[ticket];
+  delete clients[ticket];
+}
+
 const app = new Elysia()
   .get('/v1/user/email-verified', ({set, error}) => {
     set.headers['Access-Control-Allow-Origin'] = '*';
@@ -308,6 +320,22 @@ const app = new Elysia()
             // TODO: award items for completing scavenger hunt
           }
           break
+        case 'startChatTyping':
+          propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
+            return player.roomId == sender.roomId
+          }, players[ticket], {
+            type: 'startChatTyping',
+            playerId: player.id
+          });
+          break
+        case 'stopChatTyping':
+          propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
+            return player.roomId == sender.roomId
+          }, players[ticket], {
+            type: 'stopChatTyping',
+            playerId: player.id
+          });
+          break
       };
     },
 
@@ -316,16 +344,7 @@ const app = new Elysia()
 
       // should be impossible, but just in-case
       if (!players[ticket] || !clients[ticket]) { return }
-      
-      propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
-        return player.roomId == sender.roomId && player != sender
-      }, players[ticket], {
-        type: 'userLeaveRoom',
-        playerId: players[ticket].id
-      });
-    
-      delete players[ticket];
-      delete clients[ticket];
+      killPlayer(ticket);
     }
   })
   .listen(3000);
