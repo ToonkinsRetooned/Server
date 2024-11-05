@@ -4,10 +4,12 @@ import itemClasses from './itemClasses.json'
 
 const players: Record<string, SerializedPlayer> = {}
 const clients: Record<string, WebSocket> = {}
-const rooms: Record<string, {pinatas: Record<string, Array<string>>, coins: Array<SerializedSpawnObject>}> = {
-  "0": {pinatas: {}, coins: []},
-  "1": {pinatas: {}, coins: []},
-  "2": {pinatas: {}, coins: []}
+const rooms: Record<string, RoomData> = {
+  "0": {pinatas: {}, coins: [], initialPosition: { x: -0.5, y: -1.5 }},   // Spawn Room
+  "1": {pinatas: {}, coins: [], initialPosition: { x: 0, y: 0 }},         // Cafe & Arcade
+  "2": {pinatas: {}, coins: [], initialPosition: { x: -5.5, y: -1 }},     // Quarterdeck
+  "3": {pinatas: {}, coins: [], initialPosition: { x: -4, y: -2 }},       // Observatory
+  "4": {pinatas: {}, coins: [], initialPosition: { x: 3, y: 1 }}          // The Beach
 }
 const pinataState: Record<string, Array<string>> = {}
 
@@ -35,18 +37,6 @@ function propagateEvent(
       }
     }
   }
-}
-
-function killPlayer(ticket: string) {
-  propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
-    return player.roomId == sender.roomId && player != sender
-  }, players[ticket], {
-    type: 'userLeaveRoom',
-    playerId: players[ticket].id
-  });
-
-  delete players[ticket];
-  delete clients[ticket];
 }
 
 const app = new Elysia()
@@ -112,9 +102,6 @@ const app = new Elysia()
         return
       }
 
-      const existingSession = Object.values(players).findIndex((player) => player.username == account.data.AccountInfo.TitleInfo.DisplayName);
-      if (existingSession != -1) { killPlayer(ticket); }
-
       const inventory: PlayFabGetUserInventory = (await (await fetch('https://ab3c.playfabapi.com/Client/GetUserInventory', {
         method: "POST",
         body: JSON.stringify({
@@ -132,9 +119,9 @@ const app = new Elysia()
         username: account.data.AccountInfo.TitleInfo.DisplayName,
         accessLevel: 0,
         roomId: "0",
-        position: {x: 0, y: 0, z: -1},
+        position: {x: 0, y: 0},
         itemCharacter: "1",
-        itemHead: "1",
+        itemHead: "3",
         itemOverbody: "1",
         itemNeck: "1",
         itemOverwear: "1",
@@ -159,8 +146,8 @@ const app = new Elysia()
         pinatas: rooms[serialized.roomId].pinatas,
         coins: rooms[serialized.roomId].coins,
         roomId: "0",
-        initialPosition: {x: 0, y: 0, z: -1},
-        backgroundColor: {r: 255, g: 255, b: 255, a: 1}
+        initialPosition: rooms[serialized.roomId].initialPosition,
+        backgroundColor: rooms[serialized.roomId].backgroundColor
         // TODO: fix room backgounds
       });
 
@@ -202,8 +189,8 @@ const app = new Elysia()
             pinatas: rooms[player.roomId].pinatas,
             coins: rooms[player.roomId].coins,
             roomId: player.roomId,
-            initialPosition: {x: 0, y: 0, z: -1},
-            backgroundColor: {r: 255, g: 255, b: 255, a: 1}
+            initialPosition: rooms[player.roomId].initialPosition,
+            backgroundColor: rooms[player.roomId].backgroundColor
             // TODO: fix room backgounds
           });
           propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
@@ -301,7 +288,16 @@ const app = new Elysia()
 
       // should be impossible, but just in-case
       if (!players[ticket] || !clients[ticket]) { return }
-      killPlayer(ticket);
+      
+      propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
+        return player.roomId == sender.roomId && player != sender
+      }, players[ticket], {
+        type: 'userLeaveRoom',
+        playerId: players[ticket].id
+      });
+    
+      delete players[ticket];
+      delete clients[ticket];
     }
   })
   .listen(3000);
@@ -312,7 +308,7 @@ function random(min: number, max: number) {
   
 setInterval(() => {
   if (Object.keys(players).length > 0) {
-    const coinRoom = random(0, 2).toString();
+    const coinRoom = random(0, 4).toString();
     if (rooms[coinRoom].coins.length == 10) return;
 
     const newCoin: SerializedSpawnObject = {

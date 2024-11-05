@@ -7,8 +7,17 @@ enum accessLevel {
     PARTY_MASTER = 5
 }
 
-type SerializedPlayerPosition = { x: number, y: number, z: -1 }
+type SerializedPlayerPosition = { x: number, y: number }
 type SerializedPosition = { x: number, y: number }
+type SerializedBackgroundColor = { r: number, g: number, b: number, a: number }
+
+export type RoomData = {
+    players?: Array<SerializedPlayer>,
+    pinatas: Record<string, Array<string>>,
+    coins: Array<SerializedSpawnObject>,
+    initialPosition?: SerializedPlayerPosition,
+    backgroundColor?: SerializedBackgroundColor
+}
 
 export type SerializedPlayer = {
     id: string,
@@ -30,7 +39,10 @@ export type SerializedPlayer = {
     coins: number,
     level: number,
     xp: number,
-    globalMusicEnabled: boolean
+    globalMusicEnabled: boolean,
+
+    // Scavenger Hunt Progress
+    shProgress: number
 }
 
 export type SerializedSpawnObject = {

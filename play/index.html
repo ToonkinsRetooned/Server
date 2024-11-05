@@ -166,10 +166,19 @@
 
       const prototypeSend = prototypeSocket.prototype.send;
       prototypeSocket.prototype.send = function(data) {
-        console.log('Sending Packet:', data);
+        const sourceData = JSON.parse(new TextDecoder('utf-8').decode(new Uint8Array(data))); 
+        /*
+        if (sourceData.type == 'ssh') {
+          sourceData.scavengerHuntId = 'halloweenhunt2019';
+          data = new TextEncoder().encode(JSON.stringify(sourceData));
+          console.log('Modified Packet: ', data)
+        }
+        */
+        console.log('Sending Packet:', sourceData);
         return prototypeSend.call(this, data);
       };
 
+      /*
       const prototypeFetch = window.fetch;
       window.fetch = function(url, options) {
         alert('GOT FETCH!!')
@@ -184,6 +193,7 @@
         return prototypeFetch.apply(this, arguments);
       };
       window.fetch.prototype = prototypeFetch.prototype;
+      */
 
       
       function UnityProgress(gameInstance, progress) {
