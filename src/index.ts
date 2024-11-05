@@ -192,12 +192,18 @@ const app = new Elysia()
             return player.roomId == sender.roomId && player != sender
           }, player, {
             type: 'walk',
-            playerId: player,
+            playerId: player.id,
             position: player.position
           });
           ws.send(message);
           break
         case 'joinRoom':
+          propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
+            return player.roomId == sender.roomId && player != sender
+          }, player, {
+            type: 'userLeaveRoom',
+            playerId: player.id
+          });
           player.roomId = packet.id
           ws.send({
             type: 'enterRoom',
