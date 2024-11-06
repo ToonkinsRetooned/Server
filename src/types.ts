@@ -15,7 +15,7 @@ export type RoomData = {
     players?: Array<SerializedPlayer>,
     pinatas: Record<string, Array<string>>,
     coins: Array<SerializedSpawnObject>,
-    initialPosition?: SerializedPlayerPosition,
+    initialPosition: SerializedPlayerPosition,
     backgroundColor?: SerializedBackgroundColor
 }
 

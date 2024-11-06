@@ -133,7 +133,7 @@ const app = new Elysia()
         username: account.data.AccountInfo.TitleInfo.DisplayName,
         accessLevel: 0,
         roomId: "0",
-        position: {x: 0, y: 0},
+        position: rooms["0"].initialPosition,
         itemCharacter: "1",
         itemHead: "3",
         itemOverbody: "1",
@@ -204,17 +204,22 @@ const app = new Elysia()
             type: 'userLeaveRoom',
             playerId: player.id
           });
+
+          const roomInfo = rooms[packet.id]
           player.roomId = packet.id
+          player.position = roomInfo.initialPosition
+
           ws.send({
             type: 'enterRoom',
             players: Object.values(players).filter((x) => x.roomId == player.roomId && x != player),
-            pinatas: rooms[player.roomId].pinatas,
-            coins: rooms[player.roomId].coins,
+            pinatas: roomInfo.pinatas,
+            coins: roomInfo.coins,
             roomId: player.roomId,
-            initialPosition: rooms[player.roomId].initialPosition,
-            backgroundColor: rooms[player.roomId].backgroundColor
+            initialPosition: roomInfo.initialPosition,
+            backgroundColor: roomInfo.backgroundColor
             // TODO: fix room backgounds
           });
+
           propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
             return player.roomId == sender.roomId && player != sender
           }, player, {
