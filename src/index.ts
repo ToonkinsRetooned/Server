@@ -362,9 +362,6 @@ const app = new Elysia()
     // TODO: kick the player for inactivity if they haven't sent a heartbeat packet in awhile
     close(ws) {
       const { ticket } = ws.data.query as { ticket: string };
-
-      // should be impossible, but just in-case
-      if (!players[ticket] || !clients[ticket]) { return }
       killPlayer(ticket);
     }
   })
