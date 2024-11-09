@@ -76,15 +76,42 @@ const app = new Elysia()
     if (Object.keys(players).length == 0) {
       return {
         success: false,
-        message: "No players are currently in memory."
+        message: "No players are currently online."
       }
     } else {
       return {
         success: true,
         connections: Object.keys(clients).length,
-        players: Object.values(players),
-        rooms: rooms,
-        pinatas: pinataState
+        players: Object.values(players).map((player) => {
+          return {
+            id: player.id,
+            connectionId: player.connectionId,
+            username: player.username,
+            roomId: player.roomId,
+            accessLevel: ["PLAYER", "MODERATOR", "UNDERCOVER_MODERATOR", "ADMIN", "AMBASSADOR", "PARTY_MASTER"][player.accessLevel],
+            position: player.position,
+            appearance: {
+              character: player.itemCharacter,
+              head: player.itemHead,
+              overbody: player.itemOverbody,
+              neck: player.itemNeck,
+              overwear: player.itemOverwear,
+              body: player.itemBody,
+              hand: player.itemHand,
+              face: player.itemFace,
+              feet: player.itemFeet
+            },
+            statistics: {
+              coins: player.coins,
+              //level: player.level,
+              level: "NOT IMPLEMENTED",
+              //xp: player.xp
+              xp: "NOT IMPLEMENTED",
+              shProgress: player.shProgress
+            }
+          }
+        }),
+        rooms: rooms
       }
     }
   })
@@ -348,6 +375,7 @@ const app = new Elysia()
           });
           break
         case 'startPlayingMinigame':
+          // the "stopChatTyping" event is re-used for the "startPlayingMinigame" event by the client
           propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
             return player.roomId == sender.roomId
           }, players[ticket], {
@@ -367,19 +395,16 @@ const app = new Elysia()
   })
   .listen(3000);
 
-function random(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-  
+function random(min: number, max: number) { return Math.floor(Math.random() * (max - min + 1) + min); }
 setInterval(() => {
   if (Object.keys(players).length > 0) {
     const coinRoom = random(0, 4).toString();
-    if (rooms[coinRoom].coins.length == 10) return;
+    if (rooms[coinRoom].coins.length == 20) return;
 
     const newCoin: SerializedSpawnObject = {
       id: (rooms[coinRoom].coins.length + 1).toString(),
-      position: {x: random(2.5, -2.5), y: random(2.5, -2.5)},
-      value: 1
+      position: {x: random(-8, 9), y: random(-4, 1.15)},
+      value: random(1, 5)
     }
     rooms[coinRoom].coins.push(newCoin);
 
@@ -391,6 +416,6 @@ setInterval(() => {
       coin: newCoin
     }); 
   } 
-}, 5000);
+}, 10000);
 
 console.log(`🦊 Elysia is running at http://${app.server?.hostname}:${app.server?.port}`);
