@@ -383,10 +383,14 @@ const app = new Elysia()
             playerId: player.id
           });
           break
+        case 'ugps':
+          player.globalMusicEnabled = packet.globalMusicEnabled
+          break
       };
     },
 
-    // ! for some reason the closing of the websocket isn't fired when the tab is closed
+    // ! for some reason, the closing of the websocket isn't fired when the tab is closed
+    // ! for some reason, if the web server dies on a host like Render, the client will not be sent to the login screen
     // TODO: kick the player for inactivity if they haven't sent a heartbeat packet in awhile
     close(ws) {
       const { ticket } = ws.data.query as { ticket: string };
