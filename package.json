@@ -6,8 +6,7 @@
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
-    "elysia": "latest",
-    "playfab-sdk": "^2.164.241025"
+    "elysia": "latest"
   },
   "devDependencies": {
     "bun-types": "latest"

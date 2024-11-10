@@ -42,6 +42,7 @@ function propagateEvent(
 }
 
 function killPlayer(ticket: string) {
+  if (!ticket || !players[ticket]) return;
   propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
     return player.roomId == sender.roomId && player != sender
   }, players[ticket], {
@@ -54,20 +55,11 @@ function killPlayer(ticket: string) {
 }
 
 const app = new Elysia()
-  .get('/v1/user/email-verified', ({set, error}) => {
+  .all('/v1/user/email-verified', ({set, error}) => {
     set.headers['Access-Control-Allow-Origin'] = '*';
     set.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
     set.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
 
-    return {
-      emailVerified: true
-    }
-  })
-  .options('/v1/user/email-verified', ({set, error}) => {
-    set.headers['Access-Control-Allow-Origin'] = '*';
-    set.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
-    set.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
-    
     return {
       emailVerified: true
     }
@@ -162,7 +154,7 @@ const app = new Elysia()
         roomId: "0",
         position: rooms["0"].initialPosition,
         itemCharacter: "1",
-        itemHead: "3",
+        itemHead: "1",
         itemOverbody: "1",
         itemNeck: "1",
         itemOverwear: "1",
@@ -208,10 +200,10 @@ const app = new Elysia()
       console.log('Received websocket packet: ', packet.type);
 
       const { ticket } = ws.data.query as { ticket: string };
-      if (!ticket) ws.close();
       const player = players[ticket]
+      if (!ticket || !player) ws.close();
+
       const hunt = scavengerHunts[activeScavengerHunt]
-      
       switch (packet.type) {
         case 'walk':
           player.position = packet.position
@@ -384,6 +376,7 @@ const app = new Elysia()
           });
           break
         case 'ugps':
+          if (packet.globalMusicEnabled != true && packet.globalMusicEnabled != false) return;
           player.globalMusicEnabled = packet.globalMusicEnabled
           break
       };
@@ -394,6 +387,7 @@ const app = new Elysia()
     // TODO: kick the player for inactivity if they haven't sent a heartbeat packet in awhile
     close(ws) {
       const { ticket } = ws.data.query as { ticket: string };
+      if (!ticket || !players[ticket]) return;
       killPlayer(ticket);
     }
   })

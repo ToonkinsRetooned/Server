@@ -178,24 +178,6 @@
         console.log('Sending Packet:', sourceData);
         return prototypeSend.call(this, data);
       };
-
-      /*
-      const prototypeFetch = window.fetch;
-      window.fetch = function(url, options) {
-        alert('GOT FETCH!!')
-        const baseUrl = 'https://www.toonkins.com/v1/';
-        if (url.startsWith(baseUrl)) {
-          console.log('FETCH STARTS WITH');
-          const path = url.replace(baseUrl, '');
-          const newUrl = `http://localhost:3000/v1/${path}`;
-          return prototypeFetch.call(this, newUrl, options);
-        }
-
-        return prototypeFetch.apply(this, arguments);
-      };
-      window.fetch.prototype = prototypeFetch.prototype;
-      */
-
       
       function UnityProgress(gameInstance, progress) {
         var container = document.getElementById("gameContainer");

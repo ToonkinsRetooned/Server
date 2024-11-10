@@ -1,6 +1,6 @@
 # "Toonkins - Virtual World" Revival
 
-An attempt to bring back Toonkins - a virtual world that closed 2 years ago. The build present is the latest on the Internet Archive, but is not the latest of the game itself.
+An attempt to bring back Toonkins - a virtual world that closed 2 years ago. The build present is the latest WebGL build provided by one of the games' original developers. Thanks Austin!
 
 ## Websocket Event Hooks
 
@@ -12,12 +12,16 @@ I decompiled a beta copy of the desktop build from April 2020 which allows me to
 - walk
 - chat
 - updateActiveItem
+- spawnCoinCollected
 
 > Server -> Client
 - enterRoom
 - userJoinedRoom
 - login
 - userLeaveRoom
+- updateActiveItem
+- pinataUpdateState
+- spawnCoin
 
 > Client -> Server
 - joinRoom
@@ -33,13 +37,13 @@ I decompiled a beta copy of the desktop build from April 2020 which allows me to
 - (RE-IMPLEMENTED) updateActiveItem
 - (RE-IMPLEMENTED) pinataUpdateState
 - addItems
-- spawnCoin
-- spawnCoinCollected
+- (RE-IMPLEMENTED) spawnCoin
+- (RE-IMPLEMENTED) spawnCoinCollected
 - mRBgC
 - xpc
-- shs
-- shic
-- she
+- (RE-IMPLEMENTED) shs
+- (RE-IMPLEMENTED) shic
+- (RE-IMPLEMENTED) she
 - ac
 
 ### Abbreviations
