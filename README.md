@@ -39,12 +39,13 @@ I decompiled a beta copy of the desktop build from April 2020 which allows me to
 - addItems
 - (RE-IMPLEMENTED) spawnCoin
 - (RE-IMPLEMENTED) spawnCoinCollected
-- mRBgC
+- (RE-IMPLEMENTED) mRBgC
 - xpc
 - (RE-IMPLEMENTED) shs
 - (RE-IMPLEMENTED) shic
 - (RE-IMPLEMENTED) she
 - ac
+- collectItem
 
 ### Abbreviations
 
