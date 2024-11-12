@@ -64,7 +64,13 @@ const app = new Elysia()
       emailVerified: true
     }
   })
-  .get('/dev', (ctx) => {
+  .get('/v1/profanity', (ctx) => {
+    return {
+      success: true,
+      data: []
+    }
+  })
+  .get('/v1/server', (ctx) => {
     if (Object.keys(players).length == 0) {
       return {
         success: false,
