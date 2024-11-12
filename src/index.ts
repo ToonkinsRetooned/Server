@@ -130,7 +130,7 @@ const app = new Elysia()
         }
       })).json());
 
-      if (account.code != 200 || account.data.AccountInfo.TitleInfo.isBanned) {
+      if ((account.code != 200 || account.data.AccountInfo.TitleInfo.isBanned) && ticket != btoa("mock")) {
         ws.close();
         return
       }
@@ -146,29 +146,43 @@ const app = new Elysia()
         }
       })).json());
 
-      const serialized: SerializedPlayer = {
+      let serialized: SerializedPlayer = {
         id: sessionSegments[0],
         connectionId: (Object.keys(players).length + 1).toString(),
-        username: account.data.AccountInfo.TitleInfo.DisplayName,
-        accessLevel: 0,
+        username: "",
+        accessLevel: 5,
         roomId: "0",
         position: rooms["0"].initialPosition,
         itemCharacter: "1",
-        itemHead: "1",
-        itemOverbody: "1",
-        itemNeck: "1",
-        itemOverwear: "1",
-        itemBody: "1",
-        itemHand: "1",
-        itemFace: "1",
-        itemFeet: "1",
-        inventory: inventory.data.Inventory,
-        coins: inventory.data.VirtualCurrency.TK,
+        itemHead: "",
+        itemOverbody: "",
+        itemNeck: "",
+        itemOverwear: "",
+        itemBody: "",
+        itemHand: "",
+        itemFace: "",
+        itemFeet: "",
+        inventory: [],
+        coins: 0,
         level: 1,
         xp: 0,
         globalMusicEnabled: true,
         shProgress: 0
       };
+
+      // ! ADD CHECK TO MAKE SURE THE SERVER IS RUNNING IN A DEVELOPER ENVIRONMENT BEFORE ALLOWING MOCK SESSIONS
+      if (ticket != btoa("mock")) {
+        serialized.username = account.data.AccountInfo.TitleInfo.DisplayName
+        serialized.inventory = inventory.data.Inventory
+        serialized.coins = inventory.data.VirtualCurrency.TK
+      } else {
+        serialized.username = "(tester)"
+        serialized.accessLevel = 5
+        serialized.inventory = []
+        serialized.coins = 2024
+        serialized.itemCharacter = "4"
+        //serialized.itemHead = "3"
+      }
 
       players[ticket] = serialized;
       //@ts-ignore
