@@ -173,7 +173,8 @@ const app = new Elysia()
         level: 1,
         xp: 0,
         globalMusicEnabled: true,
-        shProgress: 0
+        shProgress: 0,
+        action: null
       };
 
       // ! ADD CHECK TO MAKE SURE THE SERVER IS RUNNING IN A DEVELOPER ENVIRONMENT BEFORE ALLOWING MOCK SESSIONS
@@ -247,10 +248,11 @@ const app = new Elysia()
           const roomInfo = rooms[packet.id]
           player.roomId = packet.id
           player.position = roomInfo.initialPosition
-
+          
+          const playersInRoom = Object.values(players).filter((x) => x.roomId == player.roomId && x != player)
           ws.send({
             type: 'enterRoom',
-            players: Object.values(players).filter((x) => x.roomId == player.roomId && x != player),
+            players: playersInRoom,
             pinatas: roomInfo.pinatas,
             coins: roomInfo.coins,
             roomId: player.roomId,
@@ -258,6 +260,15 @@ const app = new Elysia()
             backgroundColor: roomInfo.backgroundColor
             // TODO: fix room backgounds
           });
+
+          for (let player of playersInRoom) {
+            if (player.action == 'minigame') {
+              ws.send({
+                type: 'startPlayingMinigame',
+                playerId: player.id
+              })
+            }
+          }
 
           propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
             return player.roomId == sender.roomId && player != sender
@@ -407,6 +418,7 @@ const app = new Elysia()
           });
           break
         case 'stopChatTyping':
+          if (player.action == 'minigame') { player.action = null; }
           propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
             return player.roomId == sender.roomId
           }, players[ticket], {
@@ -416,6 +428,7 @@ const app = new Elysia()
           break
         case 'startPlayingMinigame':
           // the "stopChatTyping" event is re-used for the "startPlayingMinigame" event by the client
+          player.action = 'minigame';
           propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
             return player.roomId == sender.roomId
           }, players[ticket], {

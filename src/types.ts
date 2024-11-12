@@ -42,7 +42,8 @@ export type SerializedPlayer = {
     globalMusicEnabled: boolean,
 
     // Scavenger Hunt Progress
-    shProgress: number
+    shProgress: number,
+    action: null|"minigame"
 }
 
 export type SerializedSpawnObject = {
