@@ -261,14 +261,42 @@ const app = new Elysia()
           });
           break
         case 'chat':
-          // TODO: add checking of message length, invalid characters, etc before propagation
-          propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
-            return player.roomId == sender.roomId && player != sender
-          }, player, {
-            type: 'chat',
-            playerId: player.id,
-            text: packet.text
-          });
+          let blockMessage = false
+          const messageSegments = packet.text.split(' ');
+          if (
+            player.accessLevel >= 4 &&
+            ["/roomBgColor", "/resetRoom"].includes(messageSegments[0])
+          ) { blockMessage = true }
+
+          if (!blockMessage) {
+            // TODO: add checking of message length, invalid characters, etc before propagation
+            propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
+              return player.roomId == sender.roomId && player != sender
+            }, player, {
+              type: 'chat',
+              playerId: player.id,
+              text: packet.text
+            });
+          }
+
+          if (messageSegments[0] == "/roomBgColor") {
+            rooms[player.roomId].backgroundColor = {
+              r: parseInt(messageSegments[1]),
+              g: parseInt(messageSegments[2]),
+              b: parseInt(messageSegments[3]),
+              a: 1
+            }
+            propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
+              return player.roomId == sender.roomId
+            }, player, {
+              type: 'mRBgC',
+              roomId: player.id,
+              backgroundColor: rooms[player.roomId].backgroundColor
+            });
+          } else if (messageSegments[0] == "/resetRoom") {
+            // TODO: implement resetting room background color
+          }
+
           break
         case 'updateActiveItem':
           // ? if I learn what the item classes are, maybe add a check to make sure the provided one exists
