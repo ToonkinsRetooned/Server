@@ -64,3 +64,35 @@ To start the development server run:
 bun run dev
 ```
 > Serves @ http://localhost:3000/
+
+Database structure:
+
+```sql
+CREATE TABLE players (
+  id INT NOT NULL UNIQUE PRIMARY KEY,
+  registered DATE NOT NULL,
+  email TEXT NOT NULL UNIQUE,
+  password TEXT NOT NULL,
+  displayName TEXT NOT NULL UNIQUE,
+  accessLevel INT NOT NULL DEFAULT 0,
+  coins INT NOT NULL,
+  level INT NOT NULL,
+  xp INT NOT NULL,
+  globalMusicEnabled BOOLEAN NOT NULL DEFAULT true,
+  emailVerified BOOLEAN NOT NULL DEFAULT false,
+  usernameApproved BOOLEAN NOT NULL DEFAULT false
+);
+
+CREATE TABLE toons (
+  id INT NOT NULL UNIQUE PRIMARY KEY,
+  character TEXT DEFAULT '',
+  head TEXT DEFAULT '',
+  overbody TEXT DEFAULT '',
+  neck TEXT DEFAULT '',
+  overwear TEXT DEFAULT '',
+  body TEXT DEFAULT '',
+  hand TEXT DEFAULT '',
+  face TEXT DEFAULT '',
+  feet TEXT DEFAULT ''
+);
+```

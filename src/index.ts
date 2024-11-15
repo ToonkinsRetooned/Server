@@ -1,7 +1,13 @@
-import { Elysia } from "elysia";
+import { Elysia, t } from "elysia";
 import { RoomData, SerializedPlayer, SerializedSpawnObject, PlayFabGetAccountInfo, PlayFabGetUserInventory, PlayFabItem } from "./types";
 import itemClasses from './itemClasses.json'
 import scavengerHunts from './scavengerHunts.json'
+import { createClient } from "@libsql/client";
+
+const turso = createClient({
+  url: Bun.env.TURSO_DATABASE_URL as string,
+  authToken: Bun.env.TURSO_AUTH_TOKEN as string
+});
 
 const activeScavengerHunt = "easterhunt2020"
 const players: Record<string, SerializedPlayer> = {}
@@ -55,21 +61,6 @@ function killPlayer(ticket: string) {
 }
 
 const app = new Elysia()
-  .all('/v1/user/email-verified', ({set, error}) => {
-    set.headers['Access-Control-Allow-Origin'] = '*';
-    set.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
-    set.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
-
-    return {
-      emailVerified: true
-    }
-  })
-  .get('/v1/profanity', (ctx) => {
-    return {
-      success: true,
-      data: []
-    }
-  })
   .get('/v1/server', (ctx) => {
     if (Object.keys(players).length == 0) {
       return {
@@ -113,6 +104,49 @@ const app = new Elysia()
       }
     }
   })
+  .all('/v1/user', async ({request, body, set, error}) => {
+    set.headers['Access-Control-Allow-Origin'] = '*';
+    set.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS';
+    set.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
+    if (request.method === 'OPTIONS') { return {}; }
+
+    const reqBody = body as Record<string, string>;
+    const creationDate = new Date().getTime();
+    const password = await Bun.password.hash(reqBody.password);
+    
+    try {
+      const newId = (await turso.execute('SELECT COUNT() FROM players;')).rows[0].length;
+
+      const newAccount = await turso.batch([
+        {
+          sql: 'INSERT INTO players (id, registered, email, password, displayName, accessLevel, coins, level, xp, globalMusicEnabled, emailVerified, usernameApproved) VALUES (?,?,?,?,?,?,?,?,?,false,false,false)',
+          args: [
+            newId, creationDate,
+            // ! figure out how elysiajs validation works with routes to implement built-in validation for these database values (no xss vulnerabilities here!!)
+            reqBody.email,
+            password,
+            reqBody.displayName,
+            0, 0, 0, 0
+          ]
+        },
+        {
+          sql: 'INSERT INTO toons (id, character, head, overbody, neck, overwear, body, hand, face, feet) VALUES (?,?,?,?,?,?,?,?,?,?)',
+          args: [newId, "", "", "", "", "", "", "", "", ""]
+        }
+      ], "write");
+      
+      return { success: true };
+    } catch(e) {
+      return { errors: [{ message: e }] };
+    }
+  })
+  .all('/v1/user/email-verified', ({set, error}) => {
+    set.headers['Access-Control-Allow-Origin'] = '*';
+    set.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
+    set.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
+
+    return { emailVerified: true }
+  })
   .get('/*', async (ctx) => { return Bun.file(ctx.path != "/" ? `play${ctx.path.replace('play/', '')}` : `play/index.html`); })
   .ws('/', {
     async open(ws) {
@@ -121,6 +155,10 @@ const app = new Elysia()
         ws.close();
         return
       };
+
+      if (players[ticket]) {
+        killPlayer(ticket);
+      }
 
       const session = atob(ticket as string);
       const sessionSegments: Array<string> = session.split('-');
@@ -151,6 +189,8 @@ const app = new Elysia()
           "Content-Type": 'application/json'
         }
       })).json());
+
+      console.log(await turso.execute('SELECT * FROM players'))
 
       let serialized: SerializedPlayer = {
         id: sessionSegments[0],
@@ -188,7 +228,7 @@ const app = new Elysia()
         serialized.inventory = []
         serialized.coins = 2024
         serialized.itemCharacter = "4"
-        //serialized.itemHead = "3"
+        serialized.itemHead = "3"
       }
 
       players[ticket] = serialized;
@@ -203,9 +243,7 @@ const app = new Elysia()
         roomId: "0",
         initialPosition: rooms[serialized.roomId].initialPosition,
         backgroundColor: rooms[serialized.roomId].backgroundColor
-        // TODO: fix room backgounds
       });
-
       ws.send({type: 'login', player: serialized});
 
       propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer){
@@ -261,11 +299,11 @@ const app = new Elysia()
             // TODO: fix room backgounds
           });
 
-          for (let player of playersInRoom) {
-            if (player.action == 'minigame') {
+          for (let plr of playersInRoom) {
+            if (plr.action == 'minigame') {
               ws.send({
                 type: 'startPlayingMinigame',
-                playerId: player.id
+                playerId: plr.id
               })
             }
           }
@@ -357,8 +395,7 @@ const app = new Elysia()
             }, players[ticket], {
               type: 'pinataUpdateState',
               pinataId: pinataId,
-              //commented out for testing: pinataState: pinataRecord.length
-              pinataState: 4
+              pinataState: pinataRecord.length
             });
           } else if (pinataRecord.length == 4) {
             // TODO: add ability to get the item if you click after the 4th state
@@ -445,7 +482,6 @@ const app = new Elysia()
     },
 
     // ! for some reason, the closing of the websocket isn't fired when the tab is closed
-    // ! for some reason, if the web server dies on a host like Render, the client will not be sent to the login screen
     // TODO: kick the player for inactivity if they haven't sent a heartbeat packet in awhile
     close(ws) {
       const { ticket } = ws.data.query as { ticket: string };
