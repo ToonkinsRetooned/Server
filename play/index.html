@@ -163,7 +163,7 @@
       const prototypeSocket = window.WebSocket;
       let ticket = null;
       window.WebSocket = function(socketURL, protocols) {
-        ticket = new prototypeSocket(socketURL.replace('wss://www.toonkins.com:8081', ((window.location.protocol == 'https:') ? 'wss://' : 'ws://') + window.location.hostname), protocols);
+        ticket = new prototypeSocket(socketURL.replace('wss://www.toonkins.com:8081', ((window.location.protocol == 'https:') ? 'wss://' : 'ws://') + window.location.hostname).replace('localhost','localhost:3000'), protocols);
         return ticket;
       };
       function packet(data) {
