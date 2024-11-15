@@ -9,12 +9,14 @@ I decompiled a beta copy of the desktop build from April 2020 which allows me to
 ### Re-implemented
 
 > Both
+
 - walk
 - chat
 - updateActiveItem
 - spawnCoinCollected
 
 > Server -> Client
+
 - enterRoom
 - userJoinedRoom
 - login
@@ -24,6 +26,7 @@ I decompiled a beta copy of the desktop build from April 2020 which allows me to
 - spawnCoin
 
 > Client -> Server
+
 - joinRoom
 
 ### Identified from Desktop Build
@@ -63,6 +66,7 @@ To start the development server run:
 ```bash
 bun run dev
 ```
+
 > Serves @ http://localhost:3000/
 
 Database structure:

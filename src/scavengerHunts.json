@@ -1,84 +1,84 @@
 {
-    "easterhunt2020": [
-        {
-            "id": "egg1",
-            "roomId": "0",
-            "position": { "x": 3, "y": 1 },
-            "clue": "not too shrubby"
-        },
-        {
-            "id": "egg2",
-            "roomId": "1",
-            "position": { "x": 11, "y": -0.5 },
-            "clue": "Houston, we are ready for lunch!"
-        },
-        {
-            "id": "egg3",
-            "roomId": "2",
-            "position": { "x": 1.7, "y": -2.5 },
-            "clue": "Not quite a map"
-        },
-        {
-            "id": "egg4",
-            "roomId": "3",
-            "position": { "x": -7.5, "y": 2 },
-            "clue": "Gaze at the stars!"
-        },
-        {
-            "id": "egg5",
-            "roomId": "1",
-            "position": { "x": 2, "y": -2 },
-            "clue": "Careful, the soup is hot!"
-        },
-        {
-            "id": "egg6",
-            "roomId": "0",
-            "position": { "x": -1.5, "y": 3 },
-            "clue": "Under construction"
-        },
-        {
-            "id": "egg7",
-            "roomId": "0",
-            "position": { "x": -7, "y": -2.5 },
-            "clue": "What a bite!"
-        },
-        {
-            "id": "egg8",
-            "roomId": "2",
-            "position": { "x": 5, "y": 3 },
-            "clue": "Bob! The unicorn of the sea!"
-        }
-    ],
-    "halloweenhunt2019": [
-        {
-            "id": "candycorn",
-            "roomId": "0",
-            "position": { "x": 0, "y": 0 },
-            "clue": "people hate it"
-        },
-        {
-            "id": "eyeball",
-            "roomId": "0",
-            "position": { "x": 0, "y": 0 },
-            "clue": "balls"
-        },
-        {
-            "id": "ghost",
-            "roomId": "0",
-            "position": { "x": 0, "y": 0 },
-            "clue": "dead"
-        },
-        {
-            "id": "pumpkin",
-            "roomId": "0",
-            "position": { "x": 0, "y": 0 },
-            "clue": "you carve it"
-        },
-        {
-            "id": "skull",
-            "roomId": "0",
-            "position": { "x": 0, "y": 0 },
-            "clue": "skull emoji"
-        }
-    ]
+  "easterhunt2020": [
+    {
+      "id": "egg1",
+      "roomId": "0",
+      "position": { "x": 3, "y": 1 },
+      "clue": "not too shrubby"
+    },
+    {
+      "id": "egg2",
+      "roomId": "1",
+      "position": { "x": 11, "y": -0.5 },
+      "clue": "Houston, we are ready for lunch!"
+    },
+    {
+      "id": "egg3",
+      "roomId": "2",
+      "position": { "x": 1.7, "y": -2.5 },
+      "clue": "Not quite a map"
+    },
+    {
+      "id": "egg4",
+      "roomId": "3",
+      "position": { "x": -7.5, "y": 2 },
+      "clue": "Gaze at the stars!"
+    },
+    {
+      "id": "egg5",
+      "roomId": "1",
+      "position": { "x": 2, "y": -2 },
+      "clue": "Careful, the soup is hot!"
+    },
+    {
+      "id": "egg6",
+      "roomId": "0",
+      "position": { "x": -1.5, "y": 3 },
+      "clue": "Under construction"
+    },
+    {
+      "id": "egg7",
+      "roomId": "0",
+      "position": { "x": -7, "y": -2.5 },
+      "clue": "What a bite!"
+    },
+    {
+      "id": "egg8",
+      "roomId": "2",
+      "position": { "x": 5, "y": 3 },
+      "clue": "Bob! The unicorn of the sea!"
+    }
+  ],
+  "halloweenhunt2019": [
+    {
+      "id": "candycorn",
+      "roomId": "0",
+      "position": { "x": 0, "y": 0 },
+      "clue": "people hate it"
+    },
+    {
+      "id": "eyeball",
+      "roomId": "0",
+      "position": { "x": 0, "y": 0 },
+      "clue": "balls"
+    },
+    {
+      "id": "ghost",
+      "roomId": "0",
+      "position": { "x": 0, "y": 0 },
+      "clue": "dead"
+    },
+    {
+      "id": "pumpkin",
+      "roomId": "0",
+      "position": { "x": 0, "y": 0 },
+      "clue": "you carve it"
+    },
+    {
+      "id": "skull",
+      "roomId": "0",
+      "position": { "x": 0, "y": 0 },
+      "clue": "skull emoji"
+    }
+  ]
 }
