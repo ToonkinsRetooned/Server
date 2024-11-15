@@ -1,152 +1,14 @@
 import { Elysia, t } from "elysia";
-import { RoomData, SerializedPlayer, SerializedSpawnObject, PlayFabGetAccountInfo, PlayFabGetUserInventory, PlayFabItem } from "./types";
-import itemClasses from './itemClasses.json'
-import scavengerHunts from './scavengerHunts.json'
-import { createClient } from "@libsql/client";
-
-const turso = createClient({
-  url: Bun.env.TURSO_DATABASE_URL as string,
-  authToken: Bun.env.TURSO_AUTH_TOKEN as string
-});
+import { players, clients, rooms } from './db';
+import { apiRoute } from "./api";
+import { propagateEvent, killPlayer } from "./utils";
+import { SerializedPlayer, SerializedSpawnObject, PlayFabGetAccountInfo, PlayFabGetUserInventory, PlayFabItem } from "./types";
+import itemClasses from './itemClasses.json';
+import scavengerHunts from './scavengerHunts.json';
 
 const activeScavengerHunt = "easterhunt2020"
-const players: Record<string, SerializedPlayer> = {}
-const clients: Record<string, WebSocket> = {}
-const rooms: Record<string, RoomData> = {
-  "0": {pinatas: {}, coins: [], initialPosition: { x: -0.5, y: -1.5 }},   // Spawn Room
-  "1": {pinatas: {}, coins: [], initialPosition: { x: 0, y: 0 }},         // Cafe & Arcade
-  "2": {pinatas: {}, coins: [], initialPosition: { x: -5.5, y: -1 }},     // Quarterdeck
-  "3": {pinatas: {}, coins: [], initialPosition: { x: -4, y: -2 }},       // Observatory
-  "4": {pinatas: {}, coins: [], initialPosition: { x: 3, y: 1 }}          // The Beach
-}
-const pinataState: Record<string, Array<string>> = {}
-
-function propagateEvent(
-  condition: Function,
-  sender: SerializedPlayer | null,
-  message: { type: string } & Record<string, any>
-) {
-  console.log('Propagating ' + message.type + " event..");
-  for (let player of Object.values(players)) {
-    let include;
-    if (sender != null) {
-      include = condition(player, sender);
-    } else {
-      include = condition(player)
-    }
-
-    if (include && player != undefined) {
-      try {
-        console.log('| Propagating to: ' + player.username, player.id)
-        //@ts-ignore: The packet is converted to the correct type during traffic.
-        clients[player.id].send(message);
-      } catch(e) {
-        console.log('| Error when propagating: ', e)
-      }
-    }
-  }
-}
-
-function killPlayer(ticket: string) {
-  if (!ticket || !players[ticket]) return;
-  propagateEvent(function (player: SerializedPlayer, sender: SerializedPlayer) {
-    return player.roomId == sender.roomId && player != sender
-  }, players[ticket], {
-    type: 'userLeaveRoom',
-    playerId: players[ticket].id
-  });
-
-  delete players[ticket];
-  delete clients[ticket];
-}
-
 const app = new Elysia()
-  .get('/v1/server', (ctx) => {
-    if (Object.keys(players).length == 0) {
-      return {
-        success: false,
-        message: "No players are currently online."
-      }
-    } else {
-      return {
-        success: true,
-        connections: Object.keys(clients).length,
-        players: Object.values(players).map((player) => {
-          return {
-            id: player.id,
-            connectionId: player.connectionId,
-            username: player.username,
-            roomId: player.roomId,
-            accessLevel: ["PLAYER", "MODERATOR", "UNDERCOVER_MODERATOR", "ADMIN", "AMBASSADOR", "PARTY_MASTER"][player.accessLevel],
-            position: player.position,
-            appearance: {
-              character: player.itemCharacter,
-              head: player.itemHead,
-              overbody: player.itemOverbody,
-              neck: player.itemNeck,
-              overwear: player.itemOverwear,
-              body: player.itemBody,
-              hand: player.itemHand,
-              face: player.itemFace,
-              feet: player.itemFeet
-            },
-            statistics: {
-              coins: player.coins,
-              //level: player.level,
-              level: "NOT IMPLEMENTED",
-              //xp: player.xp
-              xp: "NOT IMPLEMENTED",
-              shProgress: player.shProgress
-            }
-          }
-        }),
-        rooms: rooms
-      }
-    }
-  })
-  .all('/v1/user', async ({request, body, set, error}) => {
-    set.headers['Access-Control-Allow-Origin'] = '*';
-    set.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS';
-    set.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
-    if (request.method === 'OPTIONS') { return {}; }
-
-    const reqBody = body as Record<string, string>;
-    const creationDate = new Date().getTime();
-    const password = await Bun.password.hash(reqBody.password);
-    
-    try {
-      const newId = (await turso.execute('SELECT COUNT() FROM players;')).rows[0].length;
-
-      const newAccount = await turso.batch([
-        {
-          sql: 'INSERT INTO players (id, registered, email, password, displayName, accessLevel, coins, level, xp, globalMusicEnabled, emailVerified, usernameApproved) VALUES (?,?,?,?,?,?,?,?,?,false,false,false)',
-          args: [
-            newId, creationDate,
-            // ! figure out how elysiajs validation works with routes to implement built-in validation for these database values (no xss vulnerabilities here!!)
-            reqBody.email,
-            password,
-            reqBody.displayName,
-            0, 0, 0, 0
-          ]
-        },
-        {
-          sql: 'INSERT INTO toons (id, character, head, overbody, neck, overwear, body, hand, face, feet) VALUES (?,?,?,?,?,?,?,?,?,?)',
-          args: [newId, "", "", "", "", "", "", "", "", ""]
-        }
-      ], "write");
-      
-      return { success: true };
-    } catch(e) {
-      return { errors: [{ message: e }] };
-    }
-  })
-  .all('/v1/user/email-verified', ({set, error}) => {
-    set.headers['Access-Control-Allow-Origin'] = '*';
-    set.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
-    set.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';
-
-    return { emailVerified: true }
-  })
+  .use(apiRoute)
   .get('/*', async (ctx) => { return Bun.file(ctx.path != "/" ? `play${ctx.path.replace('play/', '')}` : `play/index.html`); })
   .ws('/', {
     async open(ws) {
@@ -189,8 +51,6 @@ const app = new Elysia()
           "Content-Type": 'application/json'
         }
       })).json());
-
-      console.log(await turso.execute('SELECT * FROM players'))
 
       let serialized: SerializedPlayer = {
         id: sessionSegments[0],
