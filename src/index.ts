@@ -170,6 +170,7 @@ const app = new Elysia()
           ws.send(message);
           break;
         case "joinRoom":
+          if (!rooms[packet.id]) return;
           propagateEvent(
             function (player: SerializedPlayer, sender: SerializedPlayer) {
               return player.roomId == sender.roomId && player != sender;
