@@ -1,7 +1,7 @@
 import { Elysia, t } from "elysia";
-import { players, clients, rooms } from "./db";
+import { players, clients, rooms, roomColliders } from "./db";
 import { apiRoute } from "./api";
-import { propagateEvent, killPlayer } from "./utils";
+import { propagateEvent, killPlayer, getRandomPointOutsidePolygon } from "./utils";
 import {
   SerializedPlayer,
   SerializedSpawnObject,
@@ -422,9 +422,7 @@ const app = new Elysia()
           );
           break;
         case "stopChatTyping":
-          if (player.action == "minigame") {
-            player.action = null;
-          }
+          if (player.action == "minigame") player.action = null;
           propagateEvent(
             function (player: SerializedPlayer, sender: SerializedPlayer) {
               return player.roomId == sender.roomId;
@@ -476,13 +474,15 @@ function random(min: number, max: number) {
 }
 setInterval(() => {
   if (Object.keys(players).length > 0) {
-    const coinRoom = random(0, 4).toString();
-    if (rooms[coinRoom].coins.length == 20) return;
+    const coinRoom = random(0, 5).toString();
+    if (rooms[coinRoom].coins.length == 10) return;
 
+    const coinPosition = getRandomPointOutsidePolygon(roomColliders[coinRoom]);
+    if (coinPosition == null) return;
     const newCoin: SerializedSpawnObject = {
       id: (rooms[coinRoom].coins.length + 1).toString(),
-      position: { x: random(-8, 9), y: random(-4, 1.15) },
-      value: random(1, 5),
+      position: coinPosition,
+      value: random(1, 10),
     };
     rooms[coinRoom].coins.push(newCoin);
 
