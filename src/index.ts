@@ -23,6 +23,9 @@ const app = new Elysia()
     );
   })
   .ws("/", {
+    query: t.Object({
+      ticket: t.String()
+    }),
     async open(ws) {
       const { ticket } = ws.data.query as { ticket: string };
       if (!ticket || Object.keys(players).includes(ticket)) {

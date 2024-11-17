@@ -1,7 +1,9 @@
 import { Elysia, t } from "elysia";
+import { jwt } from '@elysiajs/jwt'
 import { players, clients, rooms, turso } from "./db";
 
 // TODO: make a /game route for the WS when I am able to rebuild WebGL using the re-assembled Unity game
+// TODO: change the registration API to not just be on the root of the /v1/user route group
 export const apiRoute = new Elysia({ prefix: "/v1" })
   .onRequest(({ request, set }) => {
     set.headers["Access-Control-Allow-Origin"] = "*";
@@ -11,6 +13,12 @@ export const apiRoute = new Elysia({ prefix: "/v1" })
       return {};
     }
   })
+  .use(
+    jwt({
+      name: 'jwt',
+      secret: Bun.env.JWT_SECRET!
+    })
+  )
   .get("/server", () => {
     if (Object.keys(players).length == 0) {
       return {
@@ -63,6 +71,7 @@ export const apiRoute = new Elysia({ prefix: "/v1" })
   })
   .group("/user", (app) =>
     app
+      // ? Registration API
       .post(
         "/",
         async ({ body }) => {
@@ -76,17 +85,13 @@ export const apiRoute = new Elysia({ prefix: "/v1" })
             const newAccount = await turso.batch(
               [
                 {
-                  sql: "INSERT INTO players (id, registered, email, password, displayName, accessLevel, coins, level, xp, globalMusicEnabled, emailVerified, usernameApproved) VALUES (?,?,?,?,?,?,?,?,?,false,false,false)",
+                  sql: "INSERT INTO players (id, registered, email, password, displayName, accessLevel, coins, level, xp, globalMusicEnabled, emailVerified, usernameApproved) VALUES (?,?,?,?,?,0,0,0,0,false,false,false)",
                   args: [
                     newId,
                     creationDate,
                     reqBody.email,
                     password,
-                    reqBody.displayName,
-                    0,
-                    0,
-                    0,
-                    0,
+                    reqBody.displayName
                   ],
                 },
                 {
@@ -110,7 +115,59 @@ export const apiRoute = new Elysia({ prefix: "/v1" })
           }),
         },
       )
+      .post("/login", async ({ body, jwt, cookie: { auth } }) => {
+        const reqBody = body as Record<string, string>;
+        const password = await Bun.password.hash(reqBody.password);
+
+        try {
+          const accountRegistry = await turso.execute({
+            sql: "SELECT * FROM players WHERE email = ?",
+            args: [reqBody.email]
+          });
+
+          if (accountRegistry.rows.length == 0) {
+            return {
+              success: false,
+              message: "Account not found!"
+            };
+          }
+
+          const account = accountRegistry.rows[0];
+          const validity = await Bun.password.verify(reqBody.password, account.password as string);
+
+          if (!validity) {
+            return {
+              success: false,
+              message: "Invalid password"
+            };
+          }
+
+          const token = await jwt.sign({
+            sub: account.id as any,
+            since: account.registered as any,
+            // expiry set to 2 minutes from login
+            exp: Math.floor(Date.now() / 1000) + 120
+          })
+
+          return {
+            success: true,
+            token: token
+          };
+        } catch(e) {
+          return {
+            success: false,
+            message: e
+          }
+        }
+      }, {
+        body: t.Object({
+          email: t.String({
+            format: 'email'
+          }),
+          password: t.String()
+        })
+      })
       .get("/email-verified", ({ set, error }) => {
         return { emailVerified: true };
-      }),
+      })
   );
