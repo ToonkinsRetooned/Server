@@ -7,15 +7,15 @@
     
 
     <!-- PUBLIC -->
-    <meta name="title" content="Toonkins: Retooned">
+    <meta name="title" content="Toonkins Retooned">
     <meta name="description" content="Bring back the world of Toonkins! Made by Index & Jonas.">
-    <meta name="keywords" content="toonkins,vw,virtual world,virtual,world,game,webgl,club penguin,cpps,">
+    <meta name="keywords" content="toonkins,vw,virtual world,virtual,world,game,webgl,club penguin,cpps">
     <meta name="robots" content="index, follow">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="language" content="English">
-    <meta name="og:image" content="https://toonkins.onrender.com/Images/retooned.png">
+    <meta name="og:image" content="https://toonkins.onrender.com/assets/logo.png">
     
-    <title>Toonkins | Play</title>
+    <title>Toonkins Retooned | Play</title>
     <link rel="icon" type="image/x-icon" href="Images/favicon.ico">
 
     <!-- RESOURCES -->
@@ -27,6 +27,10 @@
 
       body {
         overflow: hidden;
+      }
+
+      body, a:hover {
+        cursor: url('/assets/cursor.png') 2 2, auto !important;
       }
 
       #images {
@@ -156,7 +160,6 @@
     </style>
     </script>
     <script src="/play/Build/UnityLoader.js"></script>
-    <script src="getArchive.js"></script>
 
     <!-- WEBGL LOADING & TOONKINS.COM REQUEST PATCHES -->
     <script>
@@ -177,13 +180,6 @@
       const prototypeSend = prototypeSocket.prototype.send;
       prototypeSocket.prototype.send = function(data) {
         const sourceData = JSON.parse(new TextDecoder('utf-8').decode(new Uint8Array(data))); 
-        /*
-        if (sourceData.type == 'ssh') {
-          sourceData.scavengerHuntId = 'halloweenhunt2019';
-          data = new TextEncoder().encode(JSON.stringify(sourceData));
-          console.log('Modified Packet: ', data)
-        }
-        */
         console.log('Sending Packet:', sourceData);
         return prototypeSend.call(this, data);
       };
@@ -211,7 +207,7 @@
         }
       }
 
-      var url = window.location.pathname === "/play/" ? "Build/play.json" : "play/Build/play.json";
+      var url = (window.location.pathname.startsWith("/play/")) ? "Build/play.json" : "play/Build/play.json";
       var gameInstance = UnityLoader.instantiate("gameContainer", url, {
         onProgress: UnityProgress,
         Module: {

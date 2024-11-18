@@ -16,11 +16,12 @@ const activeScavengerHunt = "easterhunt2020";
 const app = new Elysia()
   .use(apiRoute)
   .get("/*", async (ctx) => {
-    return Bun.file(
-      ctx.path != "/"
-        ? `play${ctx.path.replace("play/", "")}`
-        : `play/index.html`,
-    );
+    const path = ctx.path.substring(1)
+    if (ctx.path.charAt(ctx.path.length - 1) == '/') {
+      return Bun.file(path + 'index.html');
+    } else {
+      return Bun.file(path);
+    }
   })
   .ws("/", {
     query: t.Object({
@@ -470,12 +471,9 @@ const app = new Elysia()
   })
   .listen(3000);
 
-function random(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
 setInterval(() => {
   if (Object.keys(players).length > 0) {
-    const coinRoom = random(0, 5).toString();
+    const coinRoom = Math.floor(Math.random() * (5 - 0 + 1) + 0).toString();
     if (rooms[coinRoom].coins.length == 10) return;
 
     const coinPosition = getRandomPointOutsidePolygon(roomColliders[coinRoom]);
@@ -483,7 +481,7 @@ setInterval(() => {
     const newCoin: SerializedSpawnObject = {
       id: (rooms[coinRoom].coins.length + 1).toString(),
       position: coinPosition,
-      value: random(1, 10),
+      value: Math.floor(Math.random() * (10 - 1 + 1) + 1),
     };
     rooms[coinRoom].coins.push(newCoin);
 
