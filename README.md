@@ -78,13 +78,13 @@ CREATE TABLE players (
   email TEXT NOT NULL UNIQUE,
   password TEXT NOT NULL,
   displayName TEXT NOT NULL UNIQUE,
-  accessLevel INT NOT NULL DEFAULT 0,
+  access_level INT NOT NULL DEFAULT 0,
   coins INT NOT NULL,
   level INT NOT NULL,
   xp INT NOT NULL,
-  globalMusicEnabled BOOLEAN NOT NULL DEFAULT true,
-  emailVerified BOOLEAN NOT NULL DEFAULT false,
-  usernameApproved BOOLEAN NOT NULL DEFAULT false
+  global_music BOOLEAN NOT NULL DEFAULT true,
+  email_verified BOOLEAN NOT NULL DEFAULT false,
+  username_approved BOOLEAN NOT NULL DEFAULT false
 );
 
 CREATE TABLE toons (
@@ -98,5 +98,16 @@ CREATE TABLE toons (
   hand TEXT DEFAULT '',
   face TEXT DEFAULT '',
   feet TEXT DEFAULT ''
+);
+
+CREATE TABLE items (
+  id INT NOT NULL UNIQUE PRIMARY KEY,
+  name TEXT NOT NULL,
+  description TEXT NOT NULL,
+  class TEXT NOT NULL,
+  price INT NOT NULL,
+  shop_id INT DEFAULT NULL,
+  is_featured BOOLEAN DEFAULT false,
+  dev_choice BOOLEAN DEFAULT false
 );
 ```
