@@ -29,7 +29,12 @@
       body {
         font-family: 'Loyola', system-ui;
 
-        background-image: url('/assets/landing.png');
+        background:
+          linear-gradient(
+            rgba(0.7, 0.7, 0.7, 0.7),
+            rgba(0.7, 0.7, 0.7, 0.7)
+          ),
+          url('/assets/landing.png');
         background-size: cover;
         background-position: center;
       }
@@ -51,7 +56,7 @@
         transform: translate(-50%, 0);
 
         width: 100%;
-        color: #1a1a1a;
+        color: #616161;
         font-size: 0.7rem;
         font-weight: lighter;
       }
@@ -83,12 +88,20 @@
         -webkit-user-select: none;
         user-select: none;
       }
+
+      .lets-play {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     </style>
   </head>
   <body>
     <main class="container text-center pt-5">
       <img src="/assets/logo.png" alt="Toonkins Retooned Logo" class="img-fluid logo no-select" width="500" draggable="false">
-      <a href="/play/" class="play" draggable="false" style="background-color: #f0b425;border: 0;font-family: 'Loyola', system-ui;padding: .5rem 3rem;border-radius: 2rem;filter: drop-shadow(0 .4rem 0 #846211);transition: background-color 200ms, transform 200ms;cursor: pointer;">
+      <img src="/assets/lets-play.png" alt="Let's play!" width="400" class="img-fluid lets-play">
+      <a href="/play/" class="play" draggable="false">
         Play now!
       </a>
       <span class="foot">
