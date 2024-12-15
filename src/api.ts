@@ -1,6 +1,8 @@
 import { Elysia, t } from "elysia";
 import { jwt } from '@elysiajs/jwt'
 import { players, clients, rooms, turso } from "./db";
+import { SerializedPlayer, LoginPlayer } from "./types";
+import { handlePlayFabLogin } from "./utils";
 
 // TODO: make a /game route for the WS when I am able to rebuild WebGL using the re-assembled Unity game
 // TODO: change the registration API to not just be on the root of the /v1/user route group
@@ -126,32 +128,62 @@ export const apiRoute = new Elysia({ prefix: "/v1" })
           });
 
           if (accountRegistry.rows.length == 0) {
+            const playfab = await handlePlayFabLogin(reqBody.email, reqBody.password);
             return {
               success: false,
-              message: "Account not found!"
+              message: "Invalid email address or password!"
             };
           }
 
-          const account = accountRegistry.rows[0];
+          let account = accountRegistry.rows[0] as unknown as LoginPlayer;
           const validity = await Bun.password.verify(reqBody.password, account.password as string);
 
           if (!validity) {
             return {
               success: false,
-              message: "Invalid password"
+              message: "Invalid email address or password!"
             };
           }
 
+          const characterInfo = await turso.execute({
+            sql: "SELECT * FROM toons WHERE id = ?",
+            args: [account.id]
+          });
+          const character = characterInfo.rows[0] as any;
+
+          delete account.email;
+          delete account.password;
+          account = {
+            ...account,
+            connectionId: (Object.keys(players).length + 1).toString(),
+            roomId: "0",
+            position: rooms["0"].initialPosition,
+            itemCharacter: character.character,
+            itemHead: character.head,
+            itemOverbody: character.overbody,
+            itemNeck: character.neck,
+            itemOverwear: character.overwear,
+            itemBody: character.body,
+            itemHand: character.hand,
+            itemFace: character.face,
+            itemFeet: character.feet,
+            inventory: [],
+            shProgress: 0,
+            action: null,
+          };
+
           const token = await jwt.sign({
-            sub: account.id as any,
-            since: account.registered as any,
+            sub: account as any,
             // expiry set to 2 minutes from login
             exp: Math.floor(Date.now() / 1000) + 120
-          })
+          });
 
           return {
-            success: true,
-            token: token
+            code: 200,
+            status: "OK",
+            data: { 
+              SessionTicket: token
+            }
           };
         } catch(e) {
           return {

@@ -1,5 +1,5 @@
-import { players, clients } from "./db";
-import { SerializedPlayer, PolygonCollider2dPoint } from "./types";
+import { turso, players, clients, rooms } from "./db";
+import { SerializedPlayer, SerializedPlayerPartial, PolygonCollider2dPoint, PlayFabGetAccountInfo, PlayFabGetUserInventory, PlayfabLogin } from "./types";
 
 export function propagateEvent(
   condition: Function,
@@ -44,7 +44,7 @@ export function killPlayer(ticket: string) {
   delete clients[ticket];
 }
 
-export function getRandomPointOutsidePolygon(polygon: PolygonCollider2dPoint[]): PolygonCollider2dPoint | null {
+export function getValidColliderSpawn(polygon: PolygonCollider2dPoint[]): PolygonCollider2dPoint | null {
   const getRandomPointInBounds = (minX: number, maxX: number, minY: number, maxY: number): PolygonCollider2dPoint => {
     return {
       x: Math.random() * (maxX - minX) + minX,
@@ -93,4 +93,85 @@ export function getRandomPointOutsidePolygon(polygon: PolygonCollider2dPoint[]):
   }
 
   return point;
+}
+
+export function serializePlayer(account: Record<string, any>, character: Record<string, string>): SerializedPlayer {
+  const serialized: SerializedPlayerPartial = {
+    ...account,
+    connectionId: (Object.keys(players).length + 1).toString(),
+    roomId: "0",
+    position: rooms["0"].initialPosition,
+    itemCharacter: character.character,
+    itemHead: character.head,
+    itemOverbody: character.overbody,
+    itemNeck: character.neck,
+    itemOverwear: character.overwear,
+    itemBody: character.body,
+    itemHand: character.hand,
+    itemFace: character.face,
+    itemFeet: character.feet,
+    inventory: [],
+    shProgress: 0,
+    action: null,
+  }
+
+  return serialized as SerializedPlayer
+}
+
+export async function handlePlayFabLogin(email: string, password: string) {
+  const login: PlayfabLogin = await (
+    await fetch("https://ab3c.playfabapi.com/Client/LoginWithEmailAddress?sdk=UnitySDK-2.59.190123", {
+      method: "POST",
+      body: JSON.stringify({
+        Email: email,
+        InfoRequestParameters: null,
+        Password: password,
+        TitleId: "AB3C"
+      }),
+      headers: { "Content-Type": "application/json" }
+    })
+  ).json();
+
+  if (login.code != 200) {
+    return { success: false };
+  }
+
+  const ticket: string = login.data.SessionTicket;
+  const playfabID: string = login.data.PlayFabId;
+
+  const account: PlayFabGetAccountInfo = await (
+    await fetch("https://ab3c.playfabapi.com/Client/GetAccountInfo", {
+      method: "POST",
+      body: JSON.stringify({
+        PlayFabId: playfabID,
+      }),
+      headers: {
+        "X-Authorization": ticket,
+        "Content-Type": "application/json"
+      },
+    })
+  ).json();
+
+  if (account.code != 200 || account.data.AccountInfo.TitleInfo.isBanned) {
+    return { success: false };
+  }
+
+  const inventory: PlayFabGetUserInventory = await (
+    await fetch("https://ab3c.playfabapi.com/Client/GetUserInventory", {
+      method: "POST",
+      body: JSON.stringify({
+        PlayFabId: playfabID,
+      }),
+      headers: {
+        "X-Authorization": ticket,
+        "Content-Type": "application/json"
+      },
+    })
+  ).json();
+
+  return {
+    success: true,
+    account: account,
+    inventory: inventory
+  }
 }

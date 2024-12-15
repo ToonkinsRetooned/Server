@@ -84,11 +84,12 @@ CREATE TABLE players (
   xp INT NOT NULL,
   global_music BOOLEAN NOT NULL DEFAULT true,
   email_verified BOOLEAN NOT NULL DEFAULT false,
-  username_approved BOOLEAN NOT NULL DEFAULT false
+  username_approved BOOLEAN NOT NULL DEFAULT false,
+  banned BOOLEAN NOT NULL DEFAULT false
 );
 
 CREATE TABLE toons (
-  id INT NOT NULL UNIQUE PRIMARY KEY,
+  id INT NOT NULL PRIMARY KEY,
   character TEXT DEFAULT '',
   head TEXT DEFAULT '',
   overbody TEXT DEFAULT '',
@@ -101,7 +102,7 @@ CREATE TABLE toons (
 );
 
 CREATE TABLE items (
-  id INT NOT NULL UNIQUE PRIMARY KEY,
+  id INT NOT NULL PRIMARY KEY,
   name TEXT NOT NULL,
   description TEXT NOT NULL,
   class TEXT NOT NULL,
@@ -109,5 +110,14 @@ CREATE TABLE items (
   shop_id INT DEFAULT NULL,
   is_featured BOOLEAN DEFAULT false,
   dev_choice BOOLEAN DEFAULT false
+);
+
+CREATE TABLE inventories (
+  id INT NOT NULL PRIMARY KEY,
+  player_id INT NOT NULL,
+  item_id INT NOT NULL,
+  purchased_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (player_id) REFERENCES players (id),
+  FOREIGN KEY (item_id) REFERENCES items (id)
 );
 ```

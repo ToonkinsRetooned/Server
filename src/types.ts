@@ -47,6 +47,29 @@ export type SerializedPlayer = {
   action: null | "minigame";
 };
 
+export type SerializedPlayerPartial = Partial<SerializedPlayer> & { 
+  connectionId: string; 
+  roomId: string;
+  position: SerializedPlayerPosition;
+  itemCharacter: string;
+  itemHead: string;
+  itemOverbody: string;
+  itemNeck: string;
+  itemOverwear: string;
+  itemBody: string;
+  itemHand: string;
+  itemFace: string;
+  itemFeet: string;
+  inventory: any[]; 
+  shProgress: number; 
+  action: any; 
+};
+
+export interface LoginPlayer extends SerializedPlayer {
+  email?: string,
+  password?: string
+};
+
 export type SerializedSpawnObject = {
   id: string;
   position: SerializedPosition;
@@ -94,4 +117,21 @@ export type PlayFabGetUserInventory = {
     };
     VirtualCurrencyRechargeTimes: {};
   };
+};
+
+export type PlayfabLogin = {
+  code: number,
+  status: string,
+  data: {
+    SessionTicket: string,
+    PlayFabId: string,
+    NewlyCreated: boolean,
+    SettingsForUser: any,
+    LastLoginTime: string,
+    EntityToken: any,
+    TreatmentAssignment: any
+
+    // SettingsForUser, EntityToken, and TreatmentAssignment are set to any type as they are
+    // not used by the code
+  }
 };

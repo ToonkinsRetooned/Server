@@ -1,7 +1,8 @@
 import { Elysia, t } from "elysia";
-import { players, clients, rooms, roomColliders } from "./db";
+import { jwt } from '@elysiajs/jwt'
+import { turso, players, clients, rooms, roomColliders } from "./db";
 import { apiRoute } from "./api";
-import { propagateEvent, killPlayer, getRandomPointOutsidePolygon } from "./utils";
+import { propagateEvent, killPlayer, getValidColliderSpawn } from "./utils";
 import {
   SerializedPlayer,
   SerializedSpawnObject,
@@ -15,6 +16,12 @@ import scavengerHunts from "./scavengerHunts.json";
 const activeScavengerHunt = "easterhunt2020";
 const app = new Elysia()
   .use(apiRoute)
+  .use(
+    jwt({
+      name: 'jwt',
+      secret: Bun.env.JWT_SECRET!
+    })
+  )
   .get("/*", async (ctx) => {
     const path = ctx.path.substring(1)
     if (ctx.path.charAt(ctx.path.length - 1) == '/') {
@@ -78,7 +85,7 @@ const app = new Elysia()
       let serialized: SerializedPlayer = {
         id: sessionSegments[0],
         connectionId: (Object.keys(players).length + 1).toString(),
-        username: "",
+        username: "(tester)",
         accessLevel: 5,
         roomId: "0",
         position: rooms["0"].initialPosition,
@@ -91,28 +98,14 @@ const app = new Elysia()
         itemHand: "",
         itemFace: "",
         itemFeet: "",
-        inventory: [],
+        inventory: inventory.data.Inventory || [],
         coins: 0,
         level: 1,
         xp: 0,
         globalMusicEnabled: true,
         shProgress: 0,
-        action: null,
+        action: null
       };
-
-      // ! ADD CHECK TO MAKE SURE THE SERVER IS RUNNING IN A DEVELOPER ENVIRONMENT BEFORE ALLOWING MOCK SESSIONS
-      if (ticket != btoa("mock")) {
-        serialized.username = account.data.AccountInfo.TitleInfo.DisplayName;
-        serialized.inventory = inventory.data.Inventory;
-        serialized.coins = inventory.data.VirtualCurrency.TK;
-      } else {
-        serialized.username = "(tester)";
-        serialized.accessLevel = 5;
-        serialized.inventory = [];
-        serialized.coins = 2024;
-        serialized.itemCharacter = "4";
-        serialized.itemHead = "3";
-      }
 
       players[ticket] = serialized;
       //@ts-ignore
@@ -141,6 +134,70 @@ const app = new Elysia()
           player: serialized,
         },
       );
+
+      /*
+      const plr = await ws.data.jwt.verify(ticket) as unknown as SerializedPlayer;
+
+      const inventory = await turso.execute({
+        sql: `
+        SELECT
+          items.id,
+          items.name,
+          items.description,
+          items.class,
+          items.price,
+          inventory.acquired_at 
+        FROM
+          inventory
+        INNER JOIN
+          items
+        ON
+          inventory.item_id = items.id
+        WHERE
+          inventory.player_id = ?;
+        `,
+        args: [plr.id]
+      });
+      plr.inventory = inventory.rows
+
+      // ! ADD CHECK TO MAKE SURE THE SERVER IS RUNNING IN A DEVELOPER ENVIRONMENT BEFORE ALLOWING MOCK SESSIONS
+      if (ticket == btoa("mock")) {
+        plr.username = "(tester)";
+        plr.accessLevel = 5;
+        plr.inventory = [];
+        plr.coins = 2024;
+        plr.itemCharacter = "4";
+        plr.itemHead = "3";
+      }
+
+      players[ticket] = plr;
+      //@ts-ignore
+      clients[serialized.id] = ws;
+
+      ws.send({
+        type: "enterRoom",
+        players: Object.values(players).filter(
+          (x) => x.roomId == "0" && x != plr,
+        ),
+        pinatas: rooms[plr.roomId].pinatas,
+        coins: rooms[plr.roomId].coins,
+        roomId: "0",
+        initialPosition: rooms[plr.roomId].initialPosition,
+        backgroundColor: rooms[plr.roomId].backgroundColor,
+      });
+      ws.send({ type: "login", player: plr });
+
+      propagateEvent(
+        function (player: SerializedPlayer, sender: SerializedPlayer) {
+          return player.roomId == sender.roomId && player != sender;
+        },
+        plr,
+        {
+          type: "userJoinedRoom",
+          player: plr,
+        },
+      );
+      */
     },
 
     async message(ws, message) {
@@ -224,9 +281,10 @@ const app = new Elysia()
         case "chat":
           let blockMessage = false;
           const messageSegments = packet.text.split(" ");
+          console.log(JSON.stringify(messageSegments))
           if (
             player.accessLevel >= 4 &&
-            ["/roomBgColor", "/resetRoom"].includes(messageSegments[0])
+            ["/roomBgColor", "/roomReset"].includes(messageSegments[0])
           ) {
             blockMessage = true;
           }
@@ -251,21 +309,39 @@ const app = new Elysia()
               r: parseInt(messageSegments[1]),
               g: parseInt(messageSegments[2]),
               b: parseInt(messageSegments[3]),
-              a: 1,
+              a: 255,
             };
+            console.log('New Room Background: ', rooms[player.roomId].backgroundColor?.r, rooms[player.roomId].backgroundColor?.g, rooms[player.roomId].backgroundColor?.b, rooms[player.roomId].backgroundColor?.a);
             propagateEvent(
               function (player: SerializedPlayer, sender: SerializedPlayer) {
-                return player.roomId == sender.roomId;
+                return true
               },
               player,
               {
                 type: "mRBgC",
-                roomId: player.id,
+                roomId: player.roomId,
                 backgroundColor: rooms[player.roomId].backgroundColor,
               },
             );
-          } else if (messageSegments[0] == "/resetRoom") {
-            // TODO: implement resetting room background color
+          } else if (messageSegments[0] == "/roomReset") {
+            console.log('reset room bg')
+            rooms[player.roomId].backgroundColor = {
+              r: 255,
+              g: 255,
+              b: 255,
+              a: 255,
+            };
+            propagateEvent(
+              function (player: SerializedPlayer, sender: SerializedPlayer) {
+                return true
+              },
+              player,
+              {
+                type: "mRBgC",
+                roomId: player.roomId,
+                backgroundColor: rooms[player.roomId].backgroundColor,
+              },
+            );
           }
 
           break;
@@ -458,6 +534,13 @@ const app = new Elysia()
             return;
           player.globalMusicEnabled = packet.globalMusicEnabled;
           break;
+        case "testJWT":
+          const token = await ws.data.jwt.verify(packet.token);
+          console.log(token);
+          break;
+        case "testWS":
+          ws.send({type: packet.event});
+          break;
       }
     },
 
@@ -476,7 +559,7 @@ setInterval(() => {
     const coinRoom = Math.floor(Math.random() * (5 - 0 + 1) + 0).toString();
     if (rooms[coinRoom].coins.length == 10) return;
 
-    const coinPosition = getRandomPointOutsidePolygon(roomColliders[coinRoom]);
+    const coinPosition = getValidColliderSpawn(roomColliders[coinRoom]);
     if (coinPosition == null) return;
     const newCoin: SerializedSpawnObject = {
       id: (rooms[coinRoom].coins.length + 1).toString(),
