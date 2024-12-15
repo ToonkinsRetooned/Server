@@ -85,7 +85,7 @@ const app = new Elysia()
       let serialized: SerializedPlayer = {
         id: sessionSegments[0],
         connectionId: (Object.keys(players).length + 1).toString(),
-        username: "(tester)",
+        username: account.data.AccountInfo.TitleInfo.DisplayName,
         accessLevel: 5,
         roomId: "0",
         position: rooms["0"].initialPosition,
@@ -99,7 +99,7 @@ const app = new Elysia()
         itemFace: "",
         itemFeet: "",
         inventory: inventory.data.Inventory || [],
-        coins: 0,
+        coins: inventory.data.VirtualCurrency.TK || 0,
         level: 1,
         xp: 0,
         globalMusicEnabled: true,
@@ -324,7 +324,6 @@ const app = new Elysia()
               },
             );
           } else if (messageSegments[0] == "/roomReset") {
-            console.log('reset room bg')
             rooms[player.roomId].backgroundColor = {
               r: 255,
               g: 255,
