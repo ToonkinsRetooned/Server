@@ -10,6 +10,7 @@ import {
   PlayFabGetUserInventory,
   PlayFabItem,
 } from "./types";
+import items from './items.json';
 import itemClasses from "./itemClasses.json";
 import scavengerHunts from "./scavengerHunts.json";
 
@@ -282,14 +283,8 @@ const app = new Elysia()
           let blockMessage = false;
           const messageSegments = packet.text.split(" ");
           console.log(JSON.stringify(messageSegments))
-          if (
-            player.accessLevel >= 4 &&
-            ["/roomBgColor", "/roomReset"].includes(messageSegments[0])
-          ) {
-            blockMessage = true;
-          }
 
-          if (!blockMessage) {
+          if (messageSegments[0].substring(0, 1) != "/") {
             // TODO: add checking of message length, invalid characters, etc before propagation
             propagateEvent(
               function (player: SerializedPlayer, sender: SerializedPlayer) {
@@ -539,7 +534,23 @@ const app = new Elysia()
           break;
         case "testWS":
           ws.send({type: packet.event});
+          ws.send({event: packet.event});
           break;
+        case "grantItem":
+          if (player.accessLevel != 5) return;
+
+          const recipient = Object.values(players).find((player) => player.username == packet.username)
+          const item = items.find((item) => item.DisplayName == packet.item);
+          if (!recipient || !item) return;
+
+          recipient.inventory.push(item);
+          clients[recipient.id].send({
+            type: 'addItems',
+            //@ts-ignore
+            items: [
+              item
+            ]
+          })
       }
     },
 

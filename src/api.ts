@@ -64,7 +64,7 @@ export const apiRoute = new Elysia({ prefix: "/v1" })
               //xp: player.xp
               xp: "NOT IMPLEMENTED",
               shProgress: player.shProgress,
-            },
+            }
           };
         }),
         rooms: rooms,

@@ -1,0 +1,2070 @@
+[
+    {
+        "ItemId": "253",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Yellow_flipflops",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "246",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Purple_newsboy_hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "247",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Green_dino_plush",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "244",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Purple_TK_hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "241",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Orange_skateboard",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "242",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Blue_buttondown_shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 2000
+    },
+    {
+        "ItemId": "250",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Teal_bow",
+        "UnitCurrency": "TK",
+        "UnitPrice": 100
+    },
+    {
+        "ItemId": "251",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Yellow_beach_shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 500
+    },
+    {
+        "ItemId": "245",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Green_Snorkle",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1600
+    },
+    {
+        "ItemId": "248",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Green_porkpie_hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "249",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Blue_shuttershades",
+        "UnitCurrency": "TK",
+        "UnitPrice": 200
+    },
+    {
+        "ItemId": "252",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Blue_flipflops",
+        "UnitCurrency": "TK",
+        "UnitPrice": 200
+    },
+    {
+        "ItemId": "254",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Orange_shades",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "255",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Yellow_shades",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "260",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Cateye_sunglasses",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "259",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Diner_cap",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1000
+    },
+    {
+        "ItemId": "258",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Diner_apron",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "263",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Hula_skirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 3000
+    },
+    {
+        "ItemId": "262",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Hawaiian_flower_hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "261",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Hawaiian_lei",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1000
+    },
+    {
+        "ItemId": "243",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Blue_hawaiian_shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "238",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Whistle",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "236",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Floaties",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "233",
+        "ItemClass": "head",
+        "Annotation": "Granted via Game Manager",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Golf_hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "232",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Avocado_costume",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "237",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Red_Snorkel",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1600
+    },
+    {
+        "ItemId": "240",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Black_shades",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "239",
+        "ItemClass": "over_body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Hawaiian_shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "231",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Taco_hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 2000
+    },
+    {
+        "ItemId": "229",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "MATH_HOMEWORK",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1000
+    },
+    {
+        "ItemId": "234",
+        "ItemClass": "over_body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Tucan_float",
+        "UnitCurrency": "TK",
+        "UnitPrice": 3000
+    },
+    {
+        "ItemId": "235",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Blue_flippers",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "230",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Poncho",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "227",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Greek_hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "228",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Spartan_helmet",
+        "UnitCurrency": "TK",
+        "UnitPrice": 900
+    },
+    {
+        "ItemId": "226",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Greek_shoes",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "224",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Mercury_helmet",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "225",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Greek_toga",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "222",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Farmer_hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 700
+    },
+    {
+        "ItemId": "220",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "AMBER_PLAID_SHIRT",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "219",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Corn_Cap",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "221",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "GARDENING_TOOLS",
+        "UnitCurrency": "TK",
+        "UnitPrice": 500
+    },
+    {
+        "ItemId": "223",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Green_overalls",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "215",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Sheep_hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 500
+    },
+    {
+        "ItemId": "217",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Sheep_body",
+        "UnitCurrency": "TK",
+        "UnitPrice": 500
+    },
+    {
+        "ItemId": "216",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Cow_bell",
+        "UnitCurrency": "TK",
+        "UnitPrice": 300
+    },
+    {
+        "ItemId": "218",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Neck_bow",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "214",
+        "ItemClass": "character",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Bunny_character",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "211",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Flower_gag",
+        "UnitCurrency": "TK",
+        "UnitPrice": 200
+    },
+    {
+        "ItemId": "210",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Arrow_hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "212",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Gag_glasses",
+        "UnitCurrency": "TK",
+        "UnitPrice": 300
+    },
+    {
+        "ItemId": "213",
+        "ItemClass": "head",
+        "Annotation": "Granted via Game Manager",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Propellar_cap_pink/green",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "208",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Fly_body",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "205",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Bee_body",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "209",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Fly_head",
+        "UnitCurrency": "TK",
+        "UnitPrice": 300
+    },
+    {
+        "ItemId": "206",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Bee_head",
+        "UnitCurrency": "TK",
+        "UnitPrice": 300
+    },
+    {
+        "ItemId": "207",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Bug_wings",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "202",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Blue_shirt_w/tie",
+        "UnitCurrency": "TK",
+        "UnitPrice": 300
+    },
+    {
+        "ItemId": "203",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Rogers_sweater",
+        "UnitCurrency": "TK",
+        "UnitPrice": 300
+    },
+    {
+        "ItemId": "200",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "St_patty_coat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 500
+    },
+    {
+        "ItemId": "199",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "St_patty_hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 300
+    },
+    {
+        "ItemId": "201",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "St_patty_shoes",
+        "UnitCurrency": "TK",
+        "UnitPrice": 200
+    },
+    {
+        "ItemId": "196",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Purple_patty_shirt",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "191",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Blue Dress",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "197",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Overalls",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "204",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "TK_shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "195",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Musicnote Necklace",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "186",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Blue eyelashes",
+        "UnitCurrency": "TK",
+        "UnitPrice": 200
+    },
+    {
+        "ItemId": "189",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Round specs",
+        "UnitCurrency": "TK",
+        "UnitPrice": 200
+    },
+    {
+        "ItemId": "193",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Pink sneakers",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "188",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Foot cast",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "198",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Pancake shirt",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "194",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Pink skull shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "190",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Pink purse",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "192",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Pink eyelashes",
+        "UnitCurrency": "TK",
+        "UnitPrice": 200
+    },
+    {
+        "ItemId": "187",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "X-ray specs",
+        "UnitCurrency": "TK",
+        "UnitPrice": 200
+    },
+    {
+        "ItemId": "184",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Heart t-shirt",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "185",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Cocoa apron",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "183",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Diving helmet",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "180",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Sailor outfit_girl",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "181",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Sailor outfit_boy",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "182",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Blue bow",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "179",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Red t-shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "177",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Black bandana hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 300
+    },
+    {
+        "ItemId": "178",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Green 80's shades",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "175",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Pink tutu",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "174",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Blue sweater",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "176",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Purple polo",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "172",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Knight boots",
+        "UnitCurrency": "TK",
+        "UnitPrice": 300
+    },
+    {
+        "ItemId": "173",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Shield",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "171",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Knight armor",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "167",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Cosmic Vest",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "170",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Backwards hat (blue)",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "168",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Blue T-shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "169",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Pink Flip Flops",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "award_6",
+        "ItemClass": "award",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Money Bags",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "164",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Ski goggles_white",
+        "UnitCurrency": "TK",
+        "UnitPrice": 300
+    },
+    {
+        "ItemId": "162",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Snowboard_Green/Blue",
+        "UnitCurrency": "TK",
+        "UnitPrice": 500
+    },
+    {
+        "ItemId": "161",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Snowboard_Pink/Blue",
+        "UnitCurrency": "TK",
+        "UnitPrice": 500
+    },
+    {
+        "ItemId": "award_10",
+        "ItemClass": "award",
+        "Annotation": "Granted via Game Manager",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Ambassador",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "163",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Ski goggles_black",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "165",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Red sneakers",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "160",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Snowboard_green",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "1",
+        "ItemClass": "character",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Blue Penguin Character",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "24",
+        "ItemClass": "overwear",
+        "Annotation": "Granted via Game Manager",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Ambassador Jacket",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "4",
+        "ItemClass": "character",
+        "Annotation": "Granted via Game Manager",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Brown Platypus Character",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "155",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Scrooge hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "166",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Baby New Years outfit",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "158",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Wool coat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 500
+    },
+    {
+        "ItemId": "157",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Elf Hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "156",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Spats (shoes)",
+        "UnitCurrency": "TK",
+        "UnitPrice": 200
+    },
+    {
+        "ItemId": "159",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Pink Beanie",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "136",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Detective hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "154",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Candy Cane",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "152",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Santa Outfit",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "151",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Santa Hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "153",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Santa Beard",
+        "UnitCurrency": "TK",
+        "UnitPrice": 200
+    },
+    {
+        "ItemId": "150",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Dreidel outfit",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "147",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Xmas light necklace",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "149",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Xmas apron",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "148",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Nutcraker hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "140",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Plunger Bow and Arrow",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "144",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Xmas Jester hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "146",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Green Sweater",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "145",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Blue Scarf",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "139",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Turkey Gobbler",
+        "UnitCurrency": "TK",
+        "UnitPrice": 200
+    },
+    {
+        "ItemId": "141",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Pilgrim Hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "142",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Cherry Pie Hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "143",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Angel Wings",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "137",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Floppy hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "135",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Big Aviators",
+        "UnitCurrency": "TK",
+        "UnitPrice": 300
+    },
+    {
+        "ItemId": "134",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Black Boots",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "133",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Aviator jacket",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "131",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Lunchbox",
+        "UnitCurrency": "TK",
+        "UnitPrice": 2000
+    },
+    {
+        "ItemId": "117",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "red letterman jacket",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "132",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Brick phone",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "128",
+        "ItemClass": "over_body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Fire Guitar",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "130",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Fuzzy socks",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "129",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Snow Beanie",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "127",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Bat bowtie",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "125",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "musketeer outfit",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "121",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "opal necklace",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "122",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "pink bow",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "124",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "musketeer hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "126",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "band hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "123",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "dino plush",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "118",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Skeleton shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 2000
+    },
+    {
+        "ItemId": "119",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Frankenstein Bride Wig",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "120",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Candy corn shirt",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "113",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "ghost",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "115",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "pumpkin bucket",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "116",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "orange shoes",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "112",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "dragon skull mask",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "award_12",
+        "ItemClass": "award",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Quest Award",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "114",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "flower hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "109",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "bycocket hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "107",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "witch hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "110",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "knight helmet",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1600
+    },
+    {
+        "ItemId": "111",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "bandana",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "108",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "witch broom",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "106",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "saw apron",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "105",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "hard hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "award_7",
+        "ItemClass": "award",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "100 Days Old",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "104",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "banana hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "102",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "green sneakers",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "103",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "red hoody",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1000
+    },
+    {
+        "ItemId": "101",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "60s glasses",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "100",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "gold tie",
+        "UnitCurrency": "TK",
+        "UnitPrice": 300
+    },
+    {
+        "ItemId": "99",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "racoon hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "96",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "raincoat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 2000
+    },
+    {
+        "ItemId": "98",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Pearls",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "94",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "rain boots",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "95",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "cloud shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "97",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "tiny crown",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "93",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "plum t-shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "92",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "stripe dress",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "91",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "acorn hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "89",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "brown sweater",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "90",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "purple sweater",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "76",
+        "ItemClass": "head",
+        "Annotation": "Granted via Game Manager",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "narwhal horn",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "award_8",
+        "ItemClass": "award",
+        "Annotation": "Granted via Game Manager",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Brilliant blogger",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "award_9",
+        "ItemClass": "award",
+        "Annotation": "Granted via Game Manager",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Broadcaster ",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "88",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "giant paint brush",
+        "UnitCurrency": "TK",
+        "UnitPrice": 2200
+    },
+    {
+        "ItemId": "87",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "giant pencil",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "86",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "purple tutu",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1000
+    },
+    {
+        "ItemId": "85",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "point dexter glasses",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "84",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "roller skates",
+        "UnitCurrency": "TK",
+        "UnitPrice": 2200
+    },
+    {
+        "ItemId": "83",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "fall scarf",
+        "UnitCurrency": "TK",
+        "UnitPrice": 2000
+    },
+    {
+        "ItemId": "82",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "tux shirt",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "78",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "red football helmet",
+        "UnitCurrency": "TK",
+        "UnitPrice": 2000
+    },
+    {
+        "ItemId": "79",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "red 0 jersey",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1000
+    },
+    {
+        "ItemId": "77",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "football helmet",
+        "UnitCurrency": "TK",
+        "UnitPrice": 2000
+    },
+    {
+        "ItemId": "81",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "umbrella hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "75",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "bandana hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "74",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Flippin' Fantastic Flippers",
+        "UnitCurrency": "TK",
+        "UnitPrice": 4000
+    },
+    {
+        "ItemId": "35",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "White Flip Flops",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "73",
+        "ItemClass": "over_body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "sousaphone",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "72",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Bowtie Pasta",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "award_1",
+        "ItemClass": "award",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Patty Panic Bronze",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "award_0",
+        "ItemClass": "award",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Patty Panic Played",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "68",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Steampunk Goggles",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1000
+    },
+    {
+        "ItemId": "70",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Bad Patty T-shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "69",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Jelly Hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 4000
+    },
+    {
+        "ItemId": "71",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Monocle",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "67",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Lab Coat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 2000
+    },
+    {
+        "ItemId": "66",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Lab Goggles",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "62",
+        "ItemClass": "head",
+        "Annotation": "Granted via Game Manager",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Fuchsia Backwards Hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "46",
+        "ItemClass": "head",
+        "Annotation": "Granted via Game Manager",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Weegeepie Hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "64",
+        "ItemClass": "overwear",
+        "Annotation": "Granted via Game Manager",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Green TK Hoodie",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "60",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Skipper Cap",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "63",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Yellow Khaki Polo",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "57",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "One Man Band",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "61",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Orange Backwards Hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "65",
+        "ItemClass": "over_body",
+        "Annotation": "Granted via Game Manager",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Turtle Float",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "54",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Space Shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 800
+    },
+    {
+        "ItemId": "55",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "TK Denim Hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "59",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Wolf Plush",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "58",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Beach Ball Tank Top",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1200
+    },
+    {
+        "ItemId": "56",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Firework Shutter Shades",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "48",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Foam Sword",
+        "UnitCurrency": "TK",
+        "UnitPrice": 2000
+    },
+    {
+        "ItemId": "47",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Space Helmet",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1500
+    },
+    {
+        "ItemId": "38",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Shutter Shades",
+        "UnitCurrency": "TK",
+        "UnitPrice": 2500
+    },
+    {
+        "ItemId": "37",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Rainbow Brain Freeze",
+        "UnitCurrency": "TK",
+        "UnitPrice": 6000
+    },
+    {
+        "ItemId": "36",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Black Flip Flops",
+        "UnitCurrency": "TK",
+        "UnitPrice": 250
+    },
+    {
+        "ItemId": "34",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Heart Shades",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1500
+    },
+    {
+        "ItemId": "31",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Gold Necklace",
+        "UnitCurrency": "TK",
+        "UnitPrice": 4000
+    },
+    {
+        "ItemId": "29",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Floppy Disk T-shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "51",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Hiking Boots",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "50",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Beach Shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 500
+    },
+    {
+        "ItemId": "49",
+        "ItemClass": "over_body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Camera",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1500
+    },
+    {
+        "ItemId": "53",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Space Boots",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1000
+    },
+    {
+        "ItemId": "52",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Collar & Tie",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "35",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "White Flip Flops",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "45",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Chef Hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 600
+    },
+    {
+        "ItemId": "44",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Sun Hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "43",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Rare Apron",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "42",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Scout Shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1000
+    },
+    {
+        "ItemId": "41",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Scout Hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 500
+    },
+    {
+        "ItemId": "40",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Rainbow Tutu",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1000
+    },
+    {
+        "ItemId": "39",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Buffer T-shirt",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "31",
+        "ItemClass": "neck",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Gold Necklace",
+        "UnitCurrency": "TK",
+        "UnitPrice": 4000
+    },
+    {
+        "ItemId": "32",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Black Visor",
+        "UnitCurrency": "TK",
+        "UnitPrice": 250
+    },
+    {
+        "ItemId": "28",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Black TK Hoodie",
+        "UnitCurrency": "TK",
+        "UnitPrice": 1000
+    },
+    {
+        "ItemId": "33",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "White Visor",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "22",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "KI Dragon Hat",
+        "UnitCurrency": "TK",
+        "UnitPrice": 2000
+    },
+    {
+        "ItemId": "29",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Floppy Disk T-shirt",
+        "UnitCurrency": "TK",
+        "UnitPrice": 400
+    },
+    {
+        "ItemId": "25",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Propeller Cap",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "30",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "TK Bandanna",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "27",
+        "ItemClass": "overwear",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Purple TK Hoodie",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "26",
+        "ItemClass": "overwear",
+        "Annotation": "Granted via Game Manager",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Space Suit",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "23",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Black Sneakers",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "21",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Pork Pie Hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "14",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Blue Polo",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "20",
+        "ItemClass": "hand",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Skateboard",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "10",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Green T-shirt",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "17",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Newsboy Cap",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "16",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Yellow Polo",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "18",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "White Sailor Cap",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "9",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Blue Sneakers",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "2",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "TK Hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "19",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Yellow Sombrero",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "15",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Red Polo",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "6",
+        "ItemClass": "face",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Aviator Glasses",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "5",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "0 Jersey",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "3",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Jester Hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "7",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Rocket T-shirt",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "13",
+        "ItemClass": "over_body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Orange Acoustic Guitar",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "12",
+        "ItemClass": "head",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Black Top Hat",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "11",
+        "ItemClass": "body",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Red Patty T-shirt",
+        "UnitPrice": 0
+    },
+    {
+        "ItemId": "8",
+        "ItemClass": "feet",
+        "CatalogVersion": "GameItems",
+        "DisplayName": "Purple Sneakers",
+        "UnitPrice": 0
+    }
+]
