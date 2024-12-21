@@ -379,8 +379,8 @@ const app = new Elysia()
           }
 
           const pinataRecord = rooms[player.roomId].pinatas.find((pinata) => pinata.id == pinataId)!;
-          if (pinataRecord.players.length != 4 && !pinataRecord.players.includes(player.id)) {
-          // ? for debugging: if (pinataRecord.players.length != 4) {
+          //if (pinataRecord.players.length != 4 && !pinataRecord.players.includes(player.id)) {
+          if (pinataRecord.players.length != 4) {
             pinataRecord.players.push(player.id);
             propagateEvent(
               function (player: SerializedPlayer, sender: SerializedPlayer) {
@@ -420,6 +420,16 @@ const app = new Elysia()
             )[0];
             if (!coin) return;
             player.coins += coin.value;
+
+            // "Money Bags" Award
+            if (player.coins >= 20000) {
+              const award = items.find((item) => item.ItemId == "award_6")!;
+              player.inventory.push(award);
+              ws.send({
+                type: "addItems",
+                items: [award]
+              });
+            };
 
             propagateEvent(
               function (player: SerializedPlayer, sender: SerializedPlayer) {
@@ -524,6 +534,16 @@ const app = new Elysia()
           if (packet.minigameId != "PATTY_PANIC") return;
           const state = JSON.parse(packet.state);
           player.coins += state.score / 100;
+
+          // "Money Bags" Award
+          if (player.coins >= 20000) {
+            const award = items.find((item) => item.ItemId == "award_6")!;
+            player.inventory.push(award);
+            ws.send({
+              type: "addItems",
+              items: [award]
+            });
+          };
 
           propagateEvent(
             function (player: SerializedPlayer, sender: SerializedPlayer) {

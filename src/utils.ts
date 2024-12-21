@@ -135,7 +135,7 @@ export async function handlePlayFabLogin(ticket: string, email?: string, passwor
         data: {
           Inventory: [],
           VirtualCurrency: {
-            TK: 5000
+            TK: 19999
           }
         }
       }

@@ -193,7 +193,7 @@ export const mockPlayer: SerializedPlayer = {
   itemFace: "",
   itemFeet: "",
   inventory: [],
-  coins: 5000,
+  coins: 19999,
   level: 1,
   xp: 0,
   globalMusicEnabled: true,
