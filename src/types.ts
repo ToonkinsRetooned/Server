@@ -11,10 +11,11 @@ type SerializedPlayerPosition = { x: number; y: number };
 type SerializedPosition = { x: number; y: number };
 export type PolygonCollider2dPoint = { x: number; y: number };
 type SerializedBackgroundColor = { r: number; g: number; b: number; a: number };
+type PinataData = { id: string, players: Array<string> }
 
 export type RoomData = {
   players?: Array<SerializedPlayer>;
-  pinatas: Record<string, Array<string>>;
+  pinatas: Array<PinataData>;
   coins: Array<SerializedSpawnObject>;
   initialPosition: SerializedPlayerPosition;
   backgroundColor?: SerializedBackgroundColor;

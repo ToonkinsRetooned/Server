@@ -11,7 +11,6 @@ import {
   PlayFabItem,
 } from "./types";
 import items from './items.json';
-import itemClasses from "./itemClasses.json";
 import scavengerHunts from "./scavengerHunts.json";
 
 const activeScavengerHunt = "easterhunt2020";
@@ -226,12 +225,14 @@ const app = new Elysia()
           ws.send({
             type: "enterRoom",
             players: playersInRoom,
-            pinatas: roomInfo.pinatas,
+            pinatas: roomInfo.pinatas.map((pinata) => ({
+              id: pinata.id,
+              state: pinata.players.length
+            })),
             coins: roomInfo.coins,
             roomId: player.roomId,
             initialPosition: roomInfo.initialPosition,
-            backgroundColor: roomInfo.backgroundColor,
-            // TODO: fix room backgounds
+            backgroundColor: roomInfo.backgroundColor
           });
 
           for (let plr of playersInRoom) {
@@ -312,7 +313,6 @@ const app = new Elysia()
 
           break;
         case "updateActiveItem":
-          // ? if I learn what the item classes are, maybe add a check to make sure the provided one exists
           if (
             player.inventory.findIndex(
               (item: PlayFabItem) => item.ItemId == packet.itemId,
@@ -321,15 +321,10 @@ const app = new Elysia()
             return;
           }
 
-          const itemIndex = itemClasses.findIndex(
-            (item) => item.ItemId == packet.itemId,
-          );
-          if (!itemIndex) {
-            return;
-          }
-          const itemClass = itemClasses[itemIndex].ItemClass;
+          const itemClass = items.find((item) => item.ItemId == packet.itemId);
+          if (!itemClass) return;
 
-          switch (itemClass) {
+          switch (itemClass.ItemClass) {
             case "character":
               player.itemCharacter = packet.itemId;
               break;
@@ -375,13 +370,18 @@ const app = new Elysia()
           break;
         case "clickPinata":
           const pinataId = packet.id;
-          if (!rooms[player.roomId].pinatas[pinataId]) {
-            rooms[player.roomId].pinatas[pinataId] = [];
+          if (!rooms[player.roomId].pinatas.find((pinata) => pinata.id == pinataId)) {
+            // ! A player could spam this socket to spam pinata creation
+            rooms[player.roomId].pinatas.push({
+              id: pinataId,
+              players: []
+            });
           }
 
-          const pinataRecord = rooms[player.roomId].pinatas[pinataId];
-          if (pinataRecord.length != 4 && !pinataRecord.includes(player.id)) {
-            pinataRecord.push(player.id);
+          const pinataRecord = rooms[player.roomId].pinatas.find((pinata) => pinata.id == pinataId)!;
+          if (pinataRecord.players.length != 4 && !pinataRecord.players.includes(player.id)) {
+          // ? for debugging: if (pinataRecord.players.length != 4) {
+            pinataRecord.players.push(player.id);
             propagateEvent(
               function (player: SerializedPlayer, sender: SerializedPlayer) {
                 return player.roomId == sender.roomId;
@@ -390,12 +390,25 @@ const app = new Elysia()
               {
                 type: "pinataUpdateState",
                 pinataId: pinataId,
-                pinataState: pinataRecord.length,
+                pinataState: pinataRecord.players.length - 1,
               },
             );
-          } else if (pinataRecord.length == 4) {
-            // TODO: add ability to get the item if you click after the 4th state
-            delete rooms[player.roomId].pinatas[pinataId];
+
+            if (pinataRecord.players.length == 4) {
+              const reward = items.find((item) => item.DisplayName == "Xmas Jester hat")!;
+              for (const recipientID of pinataRecord.players) {
+                const recipient = Object.values(players).find((player) => player.id == recipientID)!;
+                recipient.inventory.push(reward)
+                clients[recipientID].send({
+                  type: "addItems",
+                  //@ts-ignore
+                  items: [
+                    reward
+                  ]
+                });
+              };
+              pinataRecord.players = [];
+            };
           }
           break;
         case "collectObject":
