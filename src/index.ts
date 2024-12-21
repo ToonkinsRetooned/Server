@@ -2,7 +2,7 @@ import { Elysia, t } from "elysia";
 import { jwt } from '@elysiajs/jwt'
 import { turso, players, clients, rooms, roomColliders } from "./db";
 import { apiRoute } from "./api";
-import { propagateEvent, killPlayer, getValidColliderSpawn } from "./utils";
+import { propagateEvent, killPlayer, getValidColliderSpawn, handlePlayFabLogin } from "./utils";
 import {
   SerializedPlayer,
   SerializedSpawnObject,
@@ -46,47 +46,21 @@ const app = new Elysia()
         killPlayer(ticket);
       }
 
-      const session = atob(ticket as string);
-      const sessionSegments: Array<string> = session.split("-");
-
-      const account: PlayFabGetAccountInfo = await (
-        await fetch("https://ab3c.playfabapi.com/Client/GetAccountInfo", {
-          method: "POST",
-          body: JSON.stringify({
-            PlayFabId: sessionSegments[0],
-          }),
-          headers: {
-            "X-Authorization": session,
-            "Content-Type": "application/json",
-          },
-        })
-      ).json();
-
+      const playerData = await handlePlayFabLogin(ticket);
       if (
-        (account.code != 200 || account.data.AccountInfo.TitleInfo.isBanned) &&
+        (!playerData.success || playerData.account!.data.AccountInfo.TitleInfo.isBanned) &&
         ticket != btoa("mock")
       ) {
         ws.close();
         return;
       }
 
-      const inventory: PlayFabGetUserInventory = await (
-        await fetch("https://ab3c.playfabapi.com/Client/GetUserInventory", {
-          method: "POST",
-          body: JSON.stringify({
-            PlayFabId: sessionSegments[0],
-          }),
-          headers: {
-            "X-Authorization": session,
-            "Content-Type": "application/json",
-          },
-        })
-      ).json();
-
+      const account = playerData.account!.data.AccountInfo;
+      const inventory = playerData.inventory!.data;
       let serialized: SerializedPlayer = {
-        id: sessionSegments[0],
+        id: account.PlayFabId,
         connectionId: (Object.keys(players).length + 1).toString(),
-        username: account.data.AccountInfo.TitleInfo.DisplayName,
+        username: account.TitleInfo.DisplayName,
         accessLevel: 5,
         roomId: "0",
         position: rooms["0"].initialPosition,
@@ -99,14 +73,15 @@ const app = new Elysia()
         itemHand: "",
         itemFace: "",
         itemFeet: "",
-        inventory: inventory.data.Inventory || [],
-        coins: inventory.data.VirtualCurrency.TK || 0,
+        inventory: inventory.Inventory || [],
+        coins: inventory.VirtualCurrency.TK || 0,
         level: 1,
         xp: 0,
         globalMusicEnabled: true,
         shProgress: 0,
         action: null
       };
+      if (ticket == btoa("mock")) serialized.itemCharacter = "4";
 
       players[ticket] = serialized;
       //@ts-ignore
@@ -280,10 +255,7 @@ const app = new Elysia()
           );
           break;
         case "chat":
-          let blockMessage = false;
           const messageSegments = packet.text.split(" ");
-          console.log(JSON.stringify(messageSegments))
-
           if (messageSegments[0].substring(0, 1) != "/") {
             // TODO: add checking of message length, invalid characters, etc before propagation
             propagateEvent(
@@ -550,7 +522,26 @@ const app = new Elysia()
             items: [
               item
             ]
-          })
+          });
+          break;
+        case "grantMissingItems":
+          if (player.accessLevel != 5) return;
+
+          const _recipient = Object.values(players).find((player) => player.username == packet.username)
+          if (!_recipient) return;
+          const missingItems = items.filter((item) => !_recipient.inventory.some((copy: PlayFabItem) => copy.DisplayName === item.DisplayName));
+          if (!missingItems) return;
+
+          missingItems.forEach((item) => {
+            _recipient.inventory.push(item);
+          });
+          
+          clients[_recipient.id].send({
+            type: 'addItems',
+            //@ts-ignore
+            items: missingItems
+          });
+          break;
       }
     },
 

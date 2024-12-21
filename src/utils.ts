@@ -1,4 +1,4 @@
-import { turso, players, clients, rooms } from "./db";
+import { turso, players, clients, rooms, mockAccount } from "./db";
 import { SerializedPlayer, SerializedPlayerPartial, PolygonCollider2dPoint, PlayFabGetAccountInfo, PlayFabGetUserInventory, PlayfabLogin } from "./types";
 
 export function propagateEvent(
@@ -118,32 +118,59 @@ export function serializePlayer(account: Record<string, any>, character: Record<
   return serialized as SerializedPlayer
 }
 
-export async function handlePlayFabLogin(email: string, password: string) {
-  const login: PlayfabLogin = await (
-    await fetch("https://ab3c.playfabapi.com/Client/LoginWithEmailAddress?sdk=UnitySDK-2.59.190123", {
-      method: "POST",
-      body: JSON.stringify({
-        Email: email,
-        InfoRequestParameters: null,
-        Password: password,
-        TitleId: "AB3C"
-      }),
-      headers: { "Content-Type": "application/json" }
-    })
-  ).json();
+export async function handlePlayFabLogin(ticket: string, email?: string, password?: string) {
+  if (ticket == btoa("mock")) {
+    return {
+      success: true,
+      account: {
+        code: 200,
+        status: "OK",
+        data: {
+          AccountInfo: mockAccount
+        }
+      },
+      inventory: {
+        code: 200,
+        status: "OK",
+        data: {
+          Inventory: [],
+          VirtualCurrency: {
+            TK: 5000
+          }
+        }
+      }
+    }
+  };
 
-  if (login.code != 200) {
-    return { success: false };
-  }
+  if (!ticket && email && password) {
+    const login: PlayfabLogin = await (
+      await fetch("https://ab3c.playfabapi.com/Client/LoginWithEmailAddress?sdk=UnitySDK-2.59.190123", {
+        method: "POST",
+        body: JSON.stringify({
+          Email: email,
+          InfoRequestParameters: null,
+          Password: password,
+          TitleId: "AB3C"
+        }),
+        headers: { "Content-Type": "application/json" }
+      })
+    ).json();
+  
+    if (login.code != 200) {
+      return { success: false };
+    }
 
-  const ticket: string = login.data.SessionTicket;
-  const playfabID: string = login.data.PlayFabId;
+    ticket = login.data.SessionTicket;
+  } else {
+    ticket = atob(ticket);
+  };
 
+  const sessionSegments: Array<string> = ticket.split("-");
   const account: PlayFabGetAccountInfo = await (
     await fetch("https://ab3c.playfabapi.com/Client/GetAccountInfo", {
       method: "POST",
       body: JSON.stringify({
-        PlayFabId: playfabID,
+        PlayFabId: sessionSegments[0],
       }),
       headers: {
         "X-Authorization": ticket,
@@ -160,7 +187,7 @@ export async function handlePlayFabLogin(email: string, password: string) {
     await fetch("https://ab3c.playfabapi.com/Client/GetUserInventory", {
       method: "POST",
       body: JSON.stringify({
-        PlayFabId: playfabID,
+        PlayFabId: sessionSegments[0],
       }),
       headers: {
         "X-Authorization": ticket,

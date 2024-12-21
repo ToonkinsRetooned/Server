@@ -174,4 +174,44 @@ export const roomColliders: Record<string, Array<PolygonCollider2dPoint>> = {
     {x: 10.33122, y: -4.8106794},
     {x: 5.195074, y: -4.76989}
   ]
-}
+};
+
+export const mockPlayer: SerializedPlayer = {
+  id: "mock",
+  connectionId: (Object.keys(players).length + 1).toString(),
+  username: "(tester)",
+  accessLevel: 5,
+  roomId: "0",
+  position: rooms["0"].initialPosition,
+  itemCharacter: "1",
+  itemHead: "",
+  itemOverbody: "",
+  itemNeck: "",
+  itemOverwear: "",
+  itemBody: "",
+  itemHand: "",
+  itemFace: "",
+  itemFeet: "",
+  inventory: [],
+  coins: 5000,
+  level: 1,
+  xp: 0,
+  globalMusicEnabled: true,
+  shProgress: 0,
+  action: null
+};
+
+export const mockAccount = {
+  PlayFabId: "mock",
+  Created: new Date().toISOString(),
+  TitleInfo: {
+    DisplayName: "(tester)",
+    Origination: "",
+    Created: new Date().toISOString(),
+    LastLogin: new Date().toISOString(),
+    FirstLogin: new Date().toISOString(),
+    isBanned: false,
+    // unneccessary data
+    TitlePlayerAccount: null
+  }
+};
