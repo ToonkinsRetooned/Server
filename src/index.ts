@@ -180,7 +180,7 @@ const app = new Elysia()
       const packet = JSON.parse(
         Buffer.from(message as ArrayBuffer).toString("utf-8"),
       );
-      console.log("Received websocket packet: ", packet.type);
+      console.log("Received websocket packet: ", packet);
 
       const { ticket } = ws.data.query as { ticket: string };
       const player = players[ticket];

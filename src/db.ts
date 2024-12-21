@@ -7,7 +7,7 @@ export const clients: Record<string, WebSocket> = {};
 
 export const rooms: Record<string, RoomData> = {
   "0": { pinatas: {}, coins: [], initialPosition: { x: -0.5, y: -1.5 }, backgroundColor: {r: 255, g: 255, b: 255, a: 255} }, // Spawn Room
-  "1": { pinatas: {}, coins: [], initialPosition: { x: 0, y: 0 }, backgroundColor: {r: 255, g: 255, b: 255, a: 255} }, // Cafe & Arcade
+  "1": { pinatas: {}, coins: [], initialPosition: { x: 7, y: 0.6 }, backgroundColor: {r: 255, g: 255, b: 255, a: 255} }, // Cafe & Arcade
   "2": { pinatas: {}, coins: [], initialPosition: { x: -5.5, y: -1 }, backgroundColor: {r: 255, g: 255, b: 255, a: 255} }, // Quarterdeck
   "3": { pinatas: {}, coins: [], initialPosition: { x: -4, y: -2 }, backgroundColor: {r: 255, g: 255, b: 255, a: 255} }, // Observatory
   "4": { pinatas: {}, coins: [], initialPosition: { x: 3, y: 1 }, backgroundColor: {r: 255, g: 255, b: 255, a: 255} }, // The Beach
