@@ -500,6 +500,23 @@ const app = new Elysia()
             return;
           player.globalMusicEnabled = packet.globalMusicEnabled;
           break;
+        case "smggs":
+          if (packet.minigameId != "PATTY_PANIC") return;
+          const state = JSON.parse(packet.state);
+          player.coins += state.score / 100;
+
+          propagateEvent(
+            function (player: SerializedPlayer, sender: SerializedPlayer) {
+              return player.roomId == sender.roomId;
+            },
+            players[ticket],
+            {
+              type: "ac",
+              playerId: player.id,
+              amount: state.score / 100
+            },
+          );
+          break;
         case "testJWT":
           const token = await ws.data.jwt.verify(packet.token);
           console.log(token);
