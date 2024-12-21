@@ -429,10 +429,10 @@ const app = new Elysia()
           ws.send({
             type: "shs",
             scavengerHuntId: activeScavengerHunt,
-            items: hunt.map((item) => {
+            items: hunt.locations.map((item) => {
               return { id: item.id };
             }),
-            initialItem: hunt[0],
+            initialItem: hunt.locations[0],
           });
           break;
         case "cshi":
@@ -440,17 +440,24 @@ const app = new Elysia()
             type: "shic",
             scavengerHuntId: activeScavengerHunt,
             collectedItemId:
-              scavengerHunts[activeScavengerHunt][player.shProgress].id,
+              scavengerHunts[activeScavengerHunt].locations[player.shProgress].id,
             nextItem:
-              scavengerHunts[activeScavengerHunt][player.shProgress + 1],
+              scavengerHunts[activeScavengerHunt].locations[player.shProgress + 1],
           });
           player.shProgress += 1;
-          if (player.shProgress == hunt.length) {
+          if (player.shProgress == hunt.locations.length) {
             ws.send({
               type: "she",
               scavengerHuntId: activeScavengerHunt,
             });
-            // TODO: award items for completing scavenger hunt
+            
+            ws.send({
+              type: "addItems",
+              items: [
+                items.find((item) => item.ItemId == "award_12"),
+                items.find((item) => item.DisplayName == hunt.reward)
+              ]
+            });
           }
           break;
         case "startChatTyping":
