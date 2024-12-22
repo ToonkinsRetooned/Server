@@ -14,6 +14,9 @@ I decompiled a beta copy of the desktop build from April 2020 which allows me to
 - chat
 - updateActiveItem
 - spawnCoinCollected
+- startChatTyping
+- stopChatTyping
+- startPlayingMinigame
 
 > Server -> Client
 
@@ -24,10 +27,24 @@ I decompiled a beta copy of the desktop build from April 2020 which allows me to
 - updateActiveItem
 - pinataUpdateState
 - spawnCoin
+- she
 
 > Client -> Server
 
 - joinRoom
+- clickPinata
+- collectItem
+- ssh
+- cshi
+- ugps
+- smggs
+
+**Testing/"Party Master" Packets:**
+
+- testJWT (for testing)
+- testWS (for testing)
+- grantItem (for "Party Master" access level)
+- grantMissingItems (for "Party Master" access level)
 
 ### Identified from Desktop Build
 
@@ -39,7 +56,7 @@ I decompiled a beta copy of the desktop build from April 2020 which allows me to
 - (RE-IMPLEMENTED) userLeaveRoom
 - (RE-IMPLEMENTED) updateActiveItem
 - (RE-IMPLEMENTED) pinataUpdateState
-- addItems
+- (RE-IMPLEMENTED) addItems
 - (RE-IMPLEMENTED) spawnCoin
 - (RE-IMPLEMENTED) spawnCoinCollected
 - (RE-IMPLEMENTED) mRBgC
@@ -47,8 +64,10 @@ I decompiled a beta copy of the desktop build from April 2020 which allows me to
 - (RE-IMPLEMENTED) shs
 - (RE-IMPLEMENTED) shic
 - (RE-IMPLEMENTED) she
-- ac
-- collectItem
+- (RE-IMPLEMENTED) ac
+- (RE-IMPLEMENTED) collectItem
+
+> Unsure of what you gained XP from in the original game, once that has been identified I will implement the `xpc` (XP change) packet event.
 
 ### Abbreviations
 
@@ -58,6 +77,7 @@ I decompiled a beta copy of the desktop build from April 2020 which allows me to
 - shic = scavenger hunt item collected event
 - she = scavenger hunt ended event
 - ac = add currency event
+- smggs = submit mini-game score
 
 ## Development
 

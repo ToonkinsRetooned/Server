@@ -444,7 +444,9 @@ const app = new Elysia()
               },
             );
 
-            delete rooms[player.roomId].coins[packet.collectibleId];
+            rooms[player.roomId].coins = roomCoins.filter(
+              (coin) => coin.id != packet.collectibleId
+            );
           }
           break;
         case "ssh":
