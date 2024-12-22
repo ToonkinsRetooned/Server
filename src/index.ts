@@ -422,7 +422,7 @@ const app = new Elysia()
             player.coins += coin.value;
 
             // "Money Bags" Award
-            if (player.coins >= 20000) {
+            if (player.coins >= 20000 && !player.inventory.some((item: PlayFabItem) => item.ItemId == "award_6")) {
               const award = items.find((item) => item.ItemId == "award_6")!;
               player.inventory.push(award);
               ws.send({
@@ -536,7 +536,7 @@ const app = new Elysia()
           player.coins += state.score / 100;
 
           // "Money Bags" Award
-          if (player.coins >= 20000) {
+          if (player.coins >= 20000 && !player.inventory.some((item: PlayFabItem) => item.ItemId == "award_6")) {
             const award = items.find((item) => item.ItemId == "award_6")!;
             player.inventory.push(award);
             ws.send({
