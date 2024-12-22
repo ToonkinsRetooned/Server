@@ -133,9 +133,39 @@ export async function handlePlayFabLogin(ticket: string, email?: string, passwor
         code: 200,
         status: "OK",
         data: {
-          Inventory: [],
+          Inventory: [
+            {
+              ItemId: "1",
+              ItemClass: "character",
+              CatalogVersion: "GameItems",
+              DisplayName: "Blue Penguin Character",
+              UnitPrice: 0
+            },
+            {
+              ItemId: "214",
+              ItemClass: "character",
+              CatalogVersion: "GameItems",
+              DisplayName: "Bunny_character",
+              UnitPrice: 0
+            },
+            {
+              ItemId: "4",
+              ItemClass: "character",
+              CatalogVersion: "GameItems",
+              DisplayName: "Brown Platypus Character",
+              UnitPrice: 0
+            },
+            {
+              ItemId: "144",
+              ItemClass: "head",
+              CatalogVersion: "GameItems",
+              DisplayName: "Xmas Jester hat",
+              UnitCurrency: "TK",
+              UnitPrice: 1200
+            }
+          ],
           VirtualCurrency: {
-            TK: 19999
+            TK: 5000
           }
         }
       }

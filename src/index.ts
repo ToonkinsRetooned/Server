@@ -486,7 +486,7 @@ const app = new Elysia()
         case "startChatTyping":
           propagateEvent(
             function (player: SerializedPlayer, sender: SerializedPlayer) {
-              return player.roomId == sender.roomId;
+              return player.roomId == sender.roomId && sender != player;
             },
             players[ticket],
             {
@@ -499,7 +499,7 @@ const app = new Elysia()
           if (player.action == "minigame") player.action = null;
           propagateEvent(
             function (player: SerializedPlayer, sender: SerializedPlayer) {
-              return player.roomId == sender.roomId;
+              return player.roomId == sender.roomId && sender != player;
             },
             players[ticket],
             {
