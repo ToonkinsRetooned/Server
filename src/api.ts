@@ -1,5 +1,5 @@
-import { Elysia, t } from "elysia";
-import { jwt } from '@elysiajs/jwt'
+import { Elysia, error, t } from "elysia";
+import { jwt } from '@elysiajs/jwt';
 import { players, clients, rooms, turso } from "./db";
 import { SerializedPlayer, LoginPlayer } from "./types";
 import { handlePlayFabLogin } from "./utils";
@@ -7,6 +7,7 @@ import { handlePlayFabLogin } from "./utils";
 // TODO: make a /game route for the WS when I am able to rebuild WebGL using the re-assembled Unity game
 // TODO: change the registration API to not just be on the root of the /v1/user route group
 export const apiRoute = new Elysia({ prefix: "/v1" })
+  .state("shopCache", {} as Record<number, any>)
   .onRequest(({ request, set }) => {
     set.headers["Access-Control-Allow-Origin"] = "*";
     set.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS";
@@ -202,4 +203,55 @@ export const apiRoute = new Elysia({ prefix: "/v1" })
       .get("/email-verified", ({ set, error }) => {
         return { emailVerified: true };
       })
-  );
+  )
+  .get("/shop", async ({ query, store }) => {
+    const id = query.id; 
+    
+    try {
+      let items;
+      if (!store.shopCache[id]) {
+        const itemData = await turso.execute({
+          sql: "SELECT * FROM items WHERE shop_id = ?",
+          args: [id]
+        });
+        items = itemData.rows;
+        store.shopCache[id] = items;
+      } else {
+        console.log('Cached res');
+        items = store.shopCache[id];
+      };
+
+      const formatted = items.map((item: any) => {
+        if (item.is_featured === "TRUE" || item.is_featured === "FALSE") {
+          item.is_featured = item.is_featured === "TRUE";
+        };
+        if (item.dev_choice === "TRUE" || item.dev_choice === "FALSE") {
+          item.dev_choice = item.dev_choice === "TRUE";
+        };
+        return item;
+      });
+
+      if (items.length > 0) {
+        return {
+          success: true,
+          id: id,
+          data: formatted
+        };
+      } else {
+        return {
+          success: false,
+          id: id,
+          message: "No items found under that shop ID."
+        };
+      };
+    } catch(e) {
+      return {
+        success: false,
+        message: (e as Error).toString()
+      }
+    };
+  }, {
+    query: t.Object({
+      id: t.Number()
+    })
+  });
