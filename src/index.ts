@@ -200,7 +200,6 @@ const app = new Elysia()
               position: player.position,
             },
           );
-          ws.send(message);
           break;
         case "joinRoom":
           if (!rooms[packet.id]) return;
@@ -362,7 +361,7 @@ const app = new Elysia()
             {
               type: "updateActiveItem",
               playerId: player.id,
-              itemClass: itemClass,
+              itemClass: itemClass.ItemClass,
               itemId: packet.itemId,
             },
           );
@@ -643,5 +642,5 @@ setInterval(() => {
 }, 10000);
 
 console.log(
-  `🦊 Elysia is running at http://${app.server?.hostname}:${app.server?.port}`,
+  `🧊 Join the world of Toonkins @ http://${app.server?.hostname}:${app.server?.port}`,
 );

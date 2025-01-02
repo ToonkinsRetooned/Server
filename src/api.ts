@@ -217,7 +217,6 @@ export const apiRoute = new Elysia({ prefix: "/v1" })
         items = itemData.rows;
         store.shopCache[id] = items;
       } else {
-        console.log('Cached res');
         items = store.shopCache[id];
       };
 
